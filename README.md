@@ -1,33 +1,50 @@
 # OT Security Notes
 
 This repository contains personal technical notes and reflections on
-OT (Operational Technology) security in safety-critical and industrial environments.
+OT (Operational Technology) security in safety-critical and industrial
+environments.
 
-The focus is on areas where traditional IT security assumptions
-break down in OT, particularly in constrained or isolated networks.
+It serves as a conceptual and analytical layer for reasoning about how
+OT security systems behave over time, particularly in environments where
+availability, safety, and operational continuity dominate design decisions.
 
-These notes are not product documentation, vendor guidance, or formal policy.
-They are written to explore concepts, failure modes, and architectural patterns
-based on practical experience from industrial environments.
+The focus is not on individual products or controls, but on recurring
+patterns, failure modes, and architectural trade-offs observed in
+real-world industrial systems.
+
+## Scope and intent
+
+These notes explore questions such as:
+
+- How security controls behave under degraded or constrained conditions
+- Why traditional IT security assumptions often fail in OT environments
+- How risk accumulates through soft failures rather than explicit incidents
+- The gap between assessed security posture and operational reality
+- How trust, identity, and connectivity assumptions decay over time
+
+The emphasis is on *system behavior* rather than static configuration.
+
+## Relationship to other repositories
+
+This repository provides the overarching reasoning and mental models.
+More focused deep-dives into specific problem areas may exist in
+separate repositories.
+
+For example:
+- **ot-trust-in-isolated-networks** explores one concrete manifestation
+  of these patterns in the context of PKI, certificate validation, and
+  trust management.
 
 ## Structure
 
-The repository is intentionally lightweight and primarily text-based.
+* **`/notes`** — Short technical notes and reflections\n
+* **`/diagrams`** — Simple diagrams to support architectural reasoning
 
-/notes – Short technical notes and reflections
-
-/diagrams – Simple diagrams (e.g. Mermaid) to support reasoning
-
-Content may evolve over time and is not expected to be complete or polished.
+Content is intentionally lightweight and primarily text-based.
+It evolves over time and is not expected to be exhaustive or polished.
 
 ## Disclaimer
 
 All content represents personal technical reflections.
 It does not represent the views, guidance, or policies of any employer,
-customer, or organization.
-
-No production code is provided in this repository.
-
-## License
-
-This work is licensed under a Creative Commons Attribution–NonCommercial–NoDerivatives 4.0 International License.
+vendor, or organization.
