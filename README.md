@@ -31,7 +31,7 @@ More focused deep-dives into specific problem areas may exist in
 separate repositories.
 
 For example:
-- **ot-trust-in-isolated-networks** explores one concrete manifestation
+- **[ot-trust-in-isolated-networks](https://github.com/mattiaspilroth/ot-trust-in-isolated-networks)**  explores one concrete manifestation
   of these patterns in the context of PKI, certificate validation, and
   trust management.
 
