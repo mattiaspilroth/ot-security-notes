@@ -18,7 +18,7 @@ These notes explore questions such as:
 
 - How security controls behave under degraded or constrained conditions
 - Why traditional IT security assumptions often fail in OT environments
-- How risk accumulates through soft failures rather than explicit incidents
+- How risk accumulates through soft failures rather than explicit security incidents
 - The gap between assessed security posture and operational reality
 - How trust, identity, and connectivity assumptions decay over time
 
@@ -37,7 +37,7 @@ For example:
 
 ## Structure
 
-* **`/notes`** — Short technical notes and reflections\n
+* **`/notes`** — Short technical notes and reflections
 * **`/diagrams`** — Simple diagrams to support architectural reasoning
 
 Content is intentionally lightweight and primarily text-based.
