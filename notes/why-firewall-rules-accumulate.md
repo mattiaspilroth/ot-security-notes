@@ -1,9 +1,9 @@
 # Why Firewall Rules Accumulate in OT Networks
 
-Firewall rule sets in OT networks rarely reflect intentional design.  
+Firewall rule sets in OT networks rarely reflect intentional design. 
 They are the historical residue of operational problem-solving.
 
-Over time, rules accumulate because they once resolved an urgent issue during installation, maintenance, or recovery.
+Over time, rules accumulate because they once resolved an urgent issue during installation, maintenance or recovery.
 
 ---
 
