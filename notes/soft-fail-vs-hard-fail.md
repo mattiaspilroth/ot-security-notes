@@ -1,4 +1,4 @@
-# Soft Fail vs Hard Fail in OT Security Systems
+# The Trust Decay Paradox: Hard vs Soft Fail in OT Security
 
 ## Overview
 
