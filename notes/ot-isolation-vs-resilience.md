@@ -3,7 +3,7 @@
 
 ## Overview
 
-Isolation has long been a foundational principle in OT security. By limiting connectivity, systems are protected from external threats and unintended dependencies.
+Strict segmentation has long been a foundational principle in OT security, with isolation often emerging as a design consequence. While true air-gaps are rare, the design intent is usually the same: keep systems disconnected to protect them from external threats.
 
 However, isolation alone does not guarantee resilience. In highly isolated environments, the lack of external visibility and signaling paths can allow systems to degrade silently from within.
 
@@ -13,7 +13,7 @@ This note describes a common failure mode observed in isolated OT environments a
 
 ## Isolation as a Security Control
 
-Isolation is effective at:
+Isolation, as a security control, is effective at:
 - Reducing external attack surface
 - Limiting lateral movement from IT environments
 - Enforcing clear trust boundaries
@@ -64,8 +64,8 @@ Subsequent investigation revealed:
 
 This failure mode had several notable properties:
 
-- **No external trigger**  
-  The degradation originated entirely inside the isolated environment.
+- **Dynamic state vs. static inventory**  
+  Verification of the as-built design or asset inventory does not reveal active hardware decay. Resilience depends on observing the live state and behavior of a system over time, not relying solely on static documentation or upstream design validation.
 
 - **Common-mode dependency**  
   Redundancy at the component level did not eliminate systemic risk.
@@ -100,16 +100,33 @@ Key implications include:
 
 ---
 
+### The Complexity Tax of Monitoring
+
+Any mechanism introduced to bridge an isolation boundary (e.g., gateways, diodes, overlays) adds its own logical footprint and failure modes.
+
+Key considerations include:
+
+- **Maintenance burden**  
+  If the monitoring layer is more complex than the system it observes, it risks becoming the primary source of failure.
+
+- **Operational diagnosability**  
+  Resilience is reduced if faults cannot be understood and acted upon by on-site personnel without specialized external tools or vendor-specific expertise.
+
+Monitoring mechanisms must reduce overall system fragility over time, not merely relocate it.
+
+---
+
 ## Isolation vs Observability
 
 Isolation and observability are often treated as opposing goals. In practice, resilient architectures balance both:
 
 - Control and safety systems remain isolated by default
 - Health signals are selectively allowed to propagate outward
+- Observability mechanisms should preferentially sit *outside* the isolated zone, avoiding additional logic, agents, or failure modes within legacy systems
 - Alarm paths are designed to survive partial infrastructure failure
-- Visibility does not imply control or remote access
+- Visibility does not require full connectivity. Carefully scoped telemetry paths can enable monitoring without introducing functional inbound paths for threats
 
-The goal is not connectivity for convenience, but visibility for resilience.
+From a risk perspective, this balance is not symmetrical. Isolation tends to reduce exposure to low-probability, high-impact cyber events, while simultaneously increasing exposure to high-probability, high-impact operational failures if degradation remains unseen. Resilient architectures must reason about both risks explicitly rather than optimizing for only one.
 
 ---
 
@@ -128,8 +145,8 @@ If these questions cannot be answered clearly, isolation may be masking risk rat
 
 ## Summary
 
-Isolation remains a critical OT security principle, but it is not equivalent to resilience.
+Isolation is a common and often necessary design constraint in OT security, but resilience is determined by how systems behave over time, not by how disconnected they are.
 
 Highly isolated environments can degrade quietly if they lack mechanisms to signal emerging failures beyond their boundaries. Resilient OT design requires intentional observability, even under strict isolation constraints.
 
-Systems must be able to tell you when they are approaching failure, especially when they are deliberately disconnected.
+Systems must possess sufficient self-awareness to signal their approaching failure over time, especially when they are deliberately disconnected from the wider network.
