@@ -19,8 +19,9 @@ These notes explore questions such as:
 - How security controls behave under degraded or constrained conditions
 - Why traditional IT security assumptions often fail in OT environments
 - How risk accumulates through soft failures rather than explicit security incidents
-- The gap between assessed security posture and operational reality
+- The gap between assessed security posture and observed operational reality
 - How trust, identity, and connectivity assumptions decay over time
+- How organizational resourcing and lifecycle economics dictate technical stasis
 
 The emphasis is on *system behavior* rather than static configuration.
 
@@ -37,7 +38,7 @@ For example:
 
 ## Structure
 
-* **`/notes`** — Short technical notes and reflections
+* **`/notes`** — Analytical notes and architectural reflections regarding OT resilience
 * **`/diagrams`** — Simple diagrams to support architectural reasoning
 
 Content is intentionally lightweight and primarily text-based.
@@ -45,6 +46,6 @@ It evolves over time and is not expected to be exhaustive or polished.
 
 ## Disclaimer
 
-All content represents personal technical reflections.
+All content represents personal technical observations.
 It does not represent the views, guidance, or policies of any employer,
 vendor, or organization.
