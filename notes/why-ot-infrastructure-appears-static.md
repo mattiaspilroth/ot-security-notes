@@ -5,7 +5,7 @@
 
 ## 1. Purpose and Scope
 
-This note explains why operational technology (OT) environments often appear static when viewed through an IT or enterprise security lens.
+This note is written for IT and enterprise security professionals who need to understand why OT environments resist changes that appear straightforward from an IT perspective.
 
 The intent is not to justify weak security practices, nor to argue against modernization. Instead, it describes the **structural constraints, lifecycle realities, and optimization targets** that shape rational engineering decisions in OT environments.
 
@@ -296,13 +296,15 @@ Security intent is expressed through containment rather than transformation.
 OT risk decisions are typically weighted by:
 - Severity of failure
 - Safety and environmental impact
-- Production consequences
+- Production and operational consequences
 
-This contrasts with IT risk models that often emphasize likelihood and exploitability.
+This contrasts with IT risk models, which often emphasize likelihood, exploitability, and ease of remediation.
 
-In OT, a known operational risk is frequently preferred over an uncertain cyber risk that could introduce new failure modes.
+In OT environments, a known and well-understood operational risk is frequently preferred over an uncertain cyber risk that could introduce new failure modes. Decisions are therefore driven less by abstract threat likelihood and more by the credibility and magnitude of potential physical consequences.
 
-Historically, in environments where authority is fragmented, competence is tightly coupled to legacy systems, and resources are optimized for operation rather than engineering, organizations have often relied on generic frameworks and baseline controls as a defensible minimum. This should be understood less as avoidance of responsibility and more as a rational organizational response to structural constraints that many organizations are now actively working to change.
+Security controls are evaluated primarily on whether they can realistically influence these outcomes without destabilizing the process. Measures that increase uncertainty, complicate recovery, or interfere with deterministic behavior may be rejected even if they appear beneficial from an IT security perspective.
+
+Understanding OT security decisions requires understanding this consequence-driven framing. Risk is not ignored, but it is assessed through a different lens.
 
 ---
 
