@@ -10,47 +10,25 @@ The observations documented here reflect common patterns encountered across mult
 
 Much OT security guidance is written at a level of abstraction that assumes unlimited time, resources, and change capacity. In practice, security requirements are often interpreted as aspirational “best practice” targets rather than risk-informed, sustainable baselines. This typically occurs when the necessary analysis of operational feasibility is bypassed in favor of generic mandates.
 
-These notes focus on the **implementation gap** that emerges when security expectations move from policy into production environments without a shared understanding of what is practically achievable:
+These notes focus on the **implementation gap** that emerges when security expectations move from policy into production environments without a shared understanding of what is practically achievable. Rather than failing outright, many OT security programs become busy, fragmented, and difficult to sustain, while actual operational risk remains largely unchanged.
+
+Across environments where this pattern repeats, a small set of structural conditions are consistently absent:
 
 * **The Ownership Gap**
-  How OT security can fall into a responsibility vacuum between enterprise IT governance and local operations, leaving no function fully accountable for actual implementation outcomes.
+  OT security falls into a responsibility vacuum between enterprise IT governance and local operations, leaving no function fully accountable for long-term implementation outcomes.
 
-* **Policy Interpretation vs. Operational Reality**
-  How enterprise security policies, when treated as generic best practice rather than context-specific risk controls, often fail to achieve their intended effect at the site level.
+* **Risk Prioritization Gaps**
+  Security activity is driven by generic best-practice targets, audit expectations, or safe-harbor interpretations, rather than by a shared understanding of which operational risks are most material in a given context.
 
-* **Framework Misalignment**
-  Where frameworks such as IEC 62443 are applied as static compliance checklists or “safe-harbor” mechanisms to bypass the time-consuming work of site-specific investigation. This often results in frameworks being experienced as externally imposed constraints rather than used as tools for cooperative risk prioritization.
+* **Misaligned Resourcing**
+  Responsibility for implementation is placed at site level without corresponding authority, budget, or dedicated capacity, limiting execution to what can be absorbed opportunistically.
 
-* **Sustainable Resilience**
-  Identifying which security controls a local maintenance organization can realistically operate and sustain over time, given lifecycle constraints, vendor dependencies, and limited change windows.
+* **Lack of Sustained Operational Ownership**
+  Controls are introduced as projects or initiatives but lack a clear long-term owner within the line organization, leading to gradual degradation once initial attention fades.
 
-* **Organizational Readiness**
-  How funding models, incentives, and internal governance structures determine whether security is implemented collaboratively or experienced as an administrative obligation.
+An additional consequence of these patterns is the **misallocation of limited operational change capacity**. Effort is often directed toward controls that are visible, defensible, or auditable rather than toward risks that are most significant for the operation. Over time, this leads to local fatigue, reduced trust in security initiatives, and repeated cycles of activity with little measurable improvement in resilience.
 
-An additional consequence of these patterns is the **misallocation of limited operational change capacity**. When organizations default to generic best-practice targets as safe-harbor strategies, effort is often directed toward controls that are visible and auditable rather than toward risks that are most material in a given operational context. Over time, this leads to local fatigue, reduced trust in security initiatives, and, paradoxically, little or no reduction in actual operational risk.
-
-The focus is not on individual products, but on recurring patterns in how security requirements are translated into operational reality. This translation ultimately determines whether an OT security program produces **measurable risk reduction** or devolves into **formal compliance activity**.
-
-## What Enables Sustainable OT Security
-
-Across environments where OT security produced lasting risk reduction rather than temporary compliance, several common conditions were present:
-
-* **Resources allocated where implementation happens**
-  Sites had dedicated capacity, authority, and budget to implement and maintain controls.
-
-* **Collaborative risk prioritization**
-  Enterprise and site stakeholders jointly assessed material risks rather than relying solely on predefined control lists.
-
-* **Realistic implementation timelines**
-  Security work accounted for maintenance windows, vendor constraints, and operational dependencies.
-
-* **Sustained operational ownership**
-  Controls could be operated by the line organization without continuous central intervention.
-
-* **Outcome-focused metrics**
-  Progress was measured in risk reduction and resilience, not documentation volume or maturity scores.
-
-These patterns are uncommon, but repeatable when organizational structure and incentives support them.
+The focus of these notes is not on individual products or frameworks, but on recurring patterns in how security requirements are translated into operational reality. This translation ultimately determines whether an OT security program produces **measurable risk reduction** or devolves into **formal compliance activity**.
 
 ## Scope and Intent
 
