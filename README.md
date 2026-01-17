@@ -10,7 +10,7 @@ The observations documented here reflect common patterns encountered across mult
 
 Much OT security guidance is written at a level of abstraction that assumes unlimited time, resources, and change capacity. In practice, security requirements are often interpreted as aspirational “best practice” targets rather than risk-informed, sustainable baselines. This typically occurs when the necessary analysis of operational feasibility is bypassed in favor of generic mandates.
 
-These notes focus on the **implementation gap** that emerges when security expectations move from policy into production environments without a shared understanding of what is practically achievable. Rather than failing outright, many OT security programs become busy, fragmented, and difficult to sustain, while actual operational risk remains largely unchanged.
+These notes focus on the **implementation gap** that emerges when security expectations move from policy into production environments without a shared understanding of what is practically achievable. Rather than failing outright, these programs often generate significant activity while operational risk profiles remain relatively stable.
 
 Across environments where this pattern repeats, a small set of structural conditions are consistently absent:
 
