@@ -14,6 +14,14 @@ The objective is to reduce attack surface while preserving operational continuit
 
 ---
 
+## Context and Adaptation
+
+Implementation depends on safety requirements, legacy constraints, and operational risk profiles. Where specific patterns cannot be implemented, deviations should be explicitly documented and risk-assessed.
+
+The architectural principles matter more than uniform technical implementation.
+
+---
+
 ## The Problem: Infrastructure-Level Trust
 
 Traditional guidance often recommends separate Active Directory forests for IT and OT. In practice, forest trusts are frequently introduced to regain usability.
@@ -37,11 +45,11 @@ OIDC and OAuth 2.0 replace infrastructure-level trust with protocol-level trust.
 
 Instead of relying on Kerberos or NTLM, authentication and authorization are based on cryptographically signed JSON Web Tokens (JWTs).
 
-Instead of asking:
-"Is this user or machine part of my directory?"
+Instead of asking:  
+“Is this user or machine part of my directory?”
 
-The OT environment asks:
-"Is this a valid, signed token issued by a trusted Identity Provider?"
+The OT environment asks:  
+“Is this a valid, signed token issued by a trusted Identity Provider?”
 
 ### Security Implications
 
@@ -76,7 +84,7 @@ Typical users and systems:
 - Vendor support in non-privileged roles
 
 Characteristics:
-- Federated authentication via OIDC / OAuth 2.0
+- Federated authentication via OIDC / OAuth 2.0 where operationally feasible
 - Claim-based authorization using scopes or roles
 - No standing administrative privileges on OT operating systems
 - No directory-level trust between IT and OT
@@ -90,6 +98,21 @@ To meet OT availability requirements:
 - Short IT network interruptions do not immediately disrupt operator access
 
 This ensures operational continuity without weakening security.
+
+For continuously staffed operator environments, federated identity must govern session establishment and authorization, not the real-time continuity of an operator’s interaction with a running process. Once authenticated, operator sessions must remain valid across short-lived outages of identity infrastructure or network connectivity.
+
+Re-authentication should occur only on session termination, privilege elevation, or explicit lock conditions, ensuring that identity service disruptions cannot inadvertently alter operator ability during normal operation.
+
+### Time Dependency and Local Validation
+
+JWT validation relies on accurate time to evaluate token validity (`nbf`, `iat`, `exp`). In isolated or intermittently connected OT environments, unmanaged clock drift can result in legitimate access being denied.
+
+To preserve resilience:
+- OT environments must maintain a reliable local time source
+- Time synchronization must not depend on continuous connectivity to IT or external services
+- Acceptable clock skew should be explicitly defined and tested
+
+Time synchronization becomes a security dependency in federated identity models and should be treated as part of the OT trust boundary, not as an assumed background service.
 
 ---
 
@@ -150,6 +173,24 @@ Push notifications or SMS-based MFA are insufficient for this risk profile.
 
 ---
 
+### Pattern Selection and Hybrid Approaches
+
+Pattern selection depends on:
+- OT system authentication capabilities
+- Organizational PAM maturity
+- Legacy system constraints
+- Vendor support boundaries
+
+Many environments implement hybrid approaches where:
+- Modern OT applications use Pattern B (direct OIDC with strong MFA)
+- Legacy Windows systems use Pattern A (PAM with technical accounts)
+- Isolated safety systems may require neither pattern
+
+The architectural objective is to minimize infrastructure-level trust and 
+credential exposure, not to achieve uniform implementation across all systems.
+
+---
+
 ## 3. Resilience and Break-Glass Plane (Exceptional)
 
 OT environments require a fallback mechanism when federated identity or PAM dependencies are unavailable.
@@ -172,6 +213,14 @@ This prevents resilience mechanisms from being used for convenience or performan
 
 ---
 
+### Resilience-Dominant Environments
+
+In highly isolated OT environments or where safety requirements prohibit dependency on external identity services, local OT identity may play a dominant role, with federation used selectively where feasible.
+
+This represents an explicit architectural trade-off where availability and safety outweigh the benefits of centralized identity services.
+
+---
+
 ## Identity Lifecycle and Termination Risk
 
 Federated identity enables near-instant revocation of access in the Operational and Privileged Access Planes.
@@ -179,17 +228,20 @@ Federated identity enables near-instant revocation of access in the Operational 
 The Resilience Plane introduces a controlled risk:
 - Local OT accounts may remain active after employment termination in IT
 
-This risk must be mitigated through:
+This risk should be addressed through context-appropriate measures such as:
 - Regular review of local OT accounts
 - Named, non-shared break-glass identities
 - Sealed credential storage and access logging
 - Mandatory reconciliation after incident use
 
+This residual risk is an explicit design trade-off: limited, auditable identity persistence is accepted to preserve safety and operational continuity under degraded conditions.
+
 ---
 
 ## Privileged Access and MFA Requirements
 
-All privileged actions in OT environments must enforce strong authentication.
+Privileged actions in OT environments should enforce strong authentication 
+as the default control.
 
 Requirements:
 - Hardware-backed, phishing-resistant MFA
@@ -197,6 +249,8 @@ Requirements:
 - No dependency on cloud-only MFA services for safety-critical access
 
 This prevents credential replay, phishing-based escalation, and trust abuse.
+
+Where technical or safety constraints prevent implementation of hardware-backed MFA, compensating controls and explicit risk acceptance are required.
 
 ---
 
@@ -231,12 +285,20 @@ It does not replace:
 
 ## Summary
 
-By separating operational access, privileged access, and resilience mechanisms, OT environments can:
+This reference architecture demonstrates how separating operational access, 
+privileged access, and resilience mechanisms enables OT environments to:
 
-- Eliminate infrastructure-level trust between IT and OT
-- Replace legacy authentication protocols with cryptographically verifiable tokens
+- Reduce or eliminate infrastructure-level trust between IT and OT
+- Replace legacy authentication protocols with cryptographically verifiable 
+  tokens where technically feasible
 - Minimize lateral movement and credential exposure
-- Preserve operational continuity under degraded conditions
+- Preserve operational continuity under degraded conditions  
 - Improve auditability and governance alignment
 
-This architecture aligns with IEC 62443, NIS2, and zero trust principles while remaining compatible with real-world OT constraints.
+Implementation will vary based on technical constraints, safety requirements, 
+and organizational maturity. The architectural principles provide a framework 
+for reasoning about identity and access trade-offs rather than a universal 
+implementation checklist.
+
+This approach aligns with IEC 62443, NIS2, and zero trust principles while 
+remaining adaptable to real-world OT constraints.
