@@ -70,6 +70,8 @@ This protocol shift is the primary reason for the reduced attack surface.
 
 OT identity is best understood as three distinct access planes, each with a different risk profile.
 
+(See conceptual diagram: [OT Identity Access Planes and Trust Boundaries](../diagrams/identity-access-planes.md))
+
 ---
 
 ## 1. Operational Access Plane (Default)
