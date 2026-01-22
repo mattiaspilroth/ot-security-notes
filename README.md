@@ -1,68 +1,59 @@
 # OT Security Notes
 
-This repository documents architectural reasoning and technical lessons learned while designing and implementing OT security across large-scale industrial operations spanning multiple countries.
+Architectural reasoning and technical lessons learned while implementing OT security in large-scale industrial operations.
 
-It serves as an analytical layer for understanding how OT security systems behave in real-world industrial environments, where availability, safety, and operational continuity routinely collide with enterprise IT expectations.
+The focus is how security controls behave in real production environments where availability, safety, and change capacity are primary design constraints.
 
-The observations documented here reflect common patterns encountered across multiple industrial organizations and are not specific to any single company.
+These notes describe patterns observed across multiple industrial organizations. They are not specific to any single company.
+
+## What You'll Find Here
+
+- Architectural notes and design trade-offs (not maturity scores)
+- Failure modes and "soft degradation" behaviors
+- Implementation constraints that make OT different from IT in practice
+- Diagrams that support reasoning and communication
+
+**Not included:** site-identifying details, sensitive configurations, exploit instructions, or vendor-specific confidential information.
 
 ## Why These Notes Exist
 
-Much OT security guidance is written at a level of abstraction that assumes unlimited time, resources, and change capacity. In practice, security requirements are often interpreted as aspirational “best practice” targets rather than risk-informed, sustainable baselines. This typically occurs when the necessary analysis of operational feasibility is bypassed in favor of generic mandates.
+OT security guidance is often written at a level of abstraction that assumes unlimited time, resources, and operational change capacity.
 
-These notes focus on the **implementation gap** that emerges when security expectations move from policy into production environments without a shared understanding of what is practically achievable. Rather than failing outright, these programs often generate significant activity while operational risk profiles remain relatively stable.
+In production environments, a predictable gap often emerges between **what can be demonstrated** (artifacts, metrics, assessments) and **what deterministically reduces operational risk**.
 
-Across environments where this pattern repeats, a small set of structural conditions are consistently absent:
+This is rarely about incompetence. More often it results from structural conditions that shape how security work is funded, sequenced, and sustained:
 
-* **The Ownership Gap**
-  OT security falls into a responsibility vacuum between enterprise IT governance and local operations, leaving no function fully accountable for long-term implementation outcomes.
+- **Distributed authority without centralized resources**  
+  Requirements are set centrally, but implementation relies on site teams with competing operational priorities and limited dedicated capacity.
 
-* **Risk Prioritization Gaps**
-  Security activity is driven by generic best-practice targets, audit expectations, or safe-harbor interpretations, rather than by a shared understanding of which operational risks are most material in a given context.
+- **Evidence-driven investment**  
+  Work gravitates toward controls that produce visible artifacts (dashboards, reports, compliance metrics) rather than controls that enforce boundaries or constrain access.
 
-* **Misaligned Resourcing**
-  Responsibility for implementation is placed at site level without corresponding authority, budget, or dedicated capacity, limiting execution to what can be absorbed opportunistically.
+- **Organizational boundary friction**  
+  High-impact controls often sit between IT governance and OT operations, where ownership, accountability, and funding can be unclear.
 
-* **Lack of Sustained Operational Ownership**
-  Controls are introduced as projects or initiatives but lack a clear long-term owner within the line organization, leading to gradual degradation once initial attention fades.
+- **Limited operational change capacity**  
+  Industrial environments have finite tolerance for disruption. This favors controls that can be overlaid with minimal coordination—even when foundational enforcement would reduce more risk.
 
-An additional consequence of these patterns is the **misallocation of limited operational change capacity**. Effort is often directed toward controls that are visible, defensible, or auditable rather than toward risks that are most significant for the operation. Over time, this leads to local fatigue, reduced trust in security initiatives, and repeated cycles of activity with little measurable improvement in resilience.
+The result is not necessarily failure, but resource allocation patterns that optimize for **legibility and defensibility** more than **risk reduction**.
 
-The focus of these notes is not on individual products or frameworks, but on recurring patterns in how security requirements are translated into operational reality. This translation ultimately determines whether an OT security program produces **measurable risk reduction** or devolves into **formal compliance activity**.
+These notes document how that gap manifests in implementations, and what it implies for security architectures that must survive real operational constraints.
 
-## Scope and Intent
+## Notes
 
-These notes explore the friction between governance and engineering, including:
+- [Why OT Infrastructure Appears Static](./notes/00-why-ot-infrastructure-appears-static.md)
+- [Isolation Is Not Resilience](./notes/ot-isolation-vs-resilience.md)
+- [OT Identity Architecture: Federation, PAM, and Resilience](./notes/ot-identity-architecture.md)
 
-* How security controls behave under degraded or constrained conditions
-* Why common IT security assumptions often fail when applied directly to OT
-* How risk accumulates through incremental and soft failures rather than discrete incidents
-* The gap between assessed security posture and observed operational reality
-* How lifecycle economics and resourcing models drive long-term technical stasis
+## Related Repositories
 
-The emphasis is on **system behavior** and **implementation constraints** rather than static configurations or maturity scoring.
-
-## Relationship to Other Repositories
-
-This repository provides the overarching architectural reasoning. Focused deep-dives into specific problem areas are maintained separately:
-
-* **[ot-trust-in-isolated-networks](https://github.com/mattiaspilroth/ot-trust-in-isolated-networks)**  
-  Analysis of PKI, certificate validation, and trust continuity under constrained or intermittent connectivity.
-
-Additional repositories will be added as specific architectural patterns are developed and documented.
-
-## Structure
-
-* **`/notes`**
-  Analytical notes and architectural reflections on OT resilience, governance, and organizational friction.
-
-* **`/diagrams`**
-  Simple diagrams supporting architectural reasoning and risk discussions.
+- **[ot-trust-in-isolated-networks](https://github.com/mattiaspilroth/ot-trust-in-isolated-networks)**  
+  PKI, certificate validation, and trust continuity under constrained or intermittent connectivity.
 
 ## About This Work
 
-This repository documents patterns observed across multiple industrial organizations during enterprise OT security architecture and implementation work.
+This repository documents patterns observed across multiple industrial organizations while implementing OT security.
 
-The analysis reflects professional experience implementing OT security at scale, but does not represent the views, guidance, or policies of any employer, vendor, or organization.
+The analysis reflects professional experience in production environments across industrial sectors, but does not represent the views, guidance, or policies of any employer, vendor, or organization.
 
 The intent is to document architectural patterns, not to prescribe universal solutions.
