@@ -1,41 +1,49 @@
 # OT Identity Architecture: Federation, PAM, and Resilience
 
-## Overview
+## Purpose and Scope
 
-Operational Technology (OT) environments require an identity and access model that balances security, availability, and safety. Traditional directory-based trust models introduce systemic risk when applied across IT and OT boundaries.
+This note describes an identity architecture that reduces the operational burden of managing separate OT identity infrastructure while maintaining security boundaries and operational continuity.
 
-This document describes a layered OT identity architecture where:
+The patterns described here address a common problem: organizations create separate Active Directory forests for OT environments as a security measure, but then struggle with the operational reality of managing isolated identity infrastructure. This typically results in:
+- Credential sprawl and weak password practices
+- Delayed or incomplete lifecycle management (joiners, leavers, role changes)
+- Tension between security policy and operational usability
 
-- OIDC / OAuth 2.0 is the default mechanism for non-administrative access
-- Privileged access is strictly mediated through a Privileged Access Management (PAM) layer or strong, phishing-resistant MFA
-- Local OT identities exist only as a controlled resilience mechanism
+This is not a universal implementation guide. The technical patterns and access plane model are provided to support architectural decision-making in environments where:
+- OT availability and safety requirements constrain authentication dependencies
+- Regulatory frameworks require privilege segregation and audit logging
+- Legacy systems coexist with modern federated identity capabilities
+- Break-glass access must remain viable under degraded conditions
 
-The objective is to reduce attack surface while preserving operational continuity and safety.
+The approach is based on replacing infrastructure-level trust with protocol-level trust using OIDC and OAuth 2.0, combined with explicit privilege elevation controls and documented resilience mechanisms. The objective is to achieve strong security posture while maintaining manageable operational workload for OT organizations.
 
----
+## The Problem: Operational Burden of Isolated Identity
 
-## Context and Adaptation
+Traditional guidance recommends separate Active Directory forests for IT and OT. This boundary is architecturally sound but creates operational challenges.
 
-Implementation depends on safety requirements, legacy constraints, and operational risk profiles. Where specific patterns cannot be implemented, deviations should be explicitly documented and risk-assessed.
+A separate OT forest requires:
+- Dedicated expertise in Active Directory administration
+- Consistent lifecycle management (provisioning, deprovisioning, role changes)
+- Password policy enforcement and credential rotation
+- Group Policy maintenance and security patching
+- Break-glass procedure maintenance and testing
 
-The architectural principles matter more than uniform technical implementation.
+In practice, OT organizations rarely have dedicated identity management resources. The separate forest becomes passively managed, leading to:
 
----
+- Weak or reused passwords due to lack of enforcement
+- Delayed user deprovisioning after role changes or termination
+- Orphaned accounts and unclear privilege assignments
+- Emergency accounts that become permanent workarounds
 
-## The Problem: Infrastructure-Level Trust
-
-Traditional guidance often recommends separate Active Directory forests for IT and OT. In practice, forest trusts are frequently introduced to regain usability.
-
-A forest trust creates infrastructure-level trust where authentication and authorization depend on Kerberos, NTLM, RPC, and directory relationships. This extends the effective attack surface of IT into OT.
+Organizations facing this operational burden sometimes introduce forest trusts or other authentication mechanisms between IT and OT to regain usability and reduce management overhead. While this addresses the immediate operational problem, it reintroduces infrastructure-level trust where authentication and authorization depend on Kerberos, NTLM, RPC, and directory relationships.
 
 If the IT forest is compromised, attackers may leverage:
 - Kerberos delegation and ticket abuse
 - NTLM relay and credential replay
 - Group Policy manipulation
-- SID history and trust misconfiguration
 - Automated lateral movement tooling designed for Active Directory
 
-This undermines the original purpose of forest separation.
+The result is degraded security through either passive management or reintroduced trust dependencies, undermining the boundary the separate forest was intended to create.
 
 ---
 
@@ -53,7 +61,7 @@ The OT environment asks:
 
 ### Security Implications
 
-- **Protocol replacement**  
+- **Protocol replacement**
   NTLM and Kerberos are replaced by JWTs signed using asymmetric cryptography.
 
 - **Claim-based trust**  
@@ -107,14 +115,12 @@ Re-authentication should occur only on session termination, privilege elevation,
 
 ### Time Dependency and Local Validation
 
-JWT validation relies on accurate time to evaluate token validity (`nbf`, `iat`, `exp`). In isolated or intermittently connected OT environments, unmanaged clock drift can result in legitimate access being denied.
+JWT validation relies on accurate time to evaluate token validity. In isolated or intermittently connected OT environments, unmanaged clock drift can result in legitimate access being denied.
 
 To preserve resilience:
 - OT environments must maintain a reliable local time source
 - Time synchronization must not depend on continuous connectivity to IT or external services
 - Acceptable clock skew should be explicitly defined and tested
-
-Time synchronization becomes a security dependency in federated identity models and should be treated as part of the OT trust boundary, not as an assumed background service.
 
 ---
 
@@ -136,6 +142,8 @@ Characteristics:
   - Session-recorded
   - Explicitly approved where applicable
 - No standing administrator accounts tied directly to personal IT identities
+
+Administrative access is primarily remote, mediated through PAM from IT networks. Direct physical access to OT systems for maintenance or emergency scenarios falls under the Resilience Plane, not this access model.
 
 ### Administrative Footprint Control
 
@@ -301,6 +309,3 @@ Implementation will vary based on technical constraints, safety requirements,
 and organizational maturity. The architectural principles provide a framework 
 for reasoning about identity and access trade-offs rather than a universal 
 implementation checklist.
-
-This approach aligns with IEC 62443, NIS2, and zero trust principles while 
-remaining adaptable to real-world OT constraints.
