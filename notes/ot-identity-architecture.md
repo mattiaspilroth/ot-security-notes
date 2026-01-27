@@ -281,9 +281,11 @@ This distinction is critical for regulatory, safety, and resilience assessments.
 ## Scope and Limitations
 
 This model addresses:
-- User and service identity
-- Authorization and privilege elevation
+- User and service authentication and authorization
+- Privilege elevation and access control
 - Trust boundaries between IT and OT
+
+This note focuses on identity and access architecture for users and services. It does not describe the broader operational role of Active Directory in OT environments, such as device identity, group policy management, certificate services, or Windows lifecycle management. These functions may remain in a local OT AD forest even when user authentication is federated.
 
 It does not replace:
 - Endpoint hardening
