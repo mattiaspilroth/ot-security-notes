@@ -293,6 +293,8 @@ It does not replace:
 - Application-level authorization logic
 - Secure engineering of real-time control systems
 
+Any implementation of these patterns requires context-specific risk assessment, security validation, and operational testing.
+
 ---
 
 ## Summary
