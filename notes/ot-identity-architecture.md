@@ -143,7 +143,7 @@ Characteristics:
   - Explicitly approved where applicable
 - No standing administrator accounts tied directly to personal IT identities
 
-Administrative access is primarily remote, mediated through PAM from IT networks. Direct physical access to OT systems for maintenance or emergency scenarios falls under the Resilience Plane, not this access model.
+This access model addresses remote administrative access mediated through PAM from IT networks. Direct physical access to OT systems for maintenance or emergency scenarios falls under the Resilience Plane, not this access model.
 
 ### Administrative Footprint Control
 
