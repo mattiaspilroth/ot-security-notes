@@ -33,7 +33,7 @@ This is rarely about incompetence. More often it results from structural conditi
   High-impact controls often sit between IT governance and OT operations, where ownership, accountability, and funding can be unclear.
 
 - **Limited operational change capacity**  
-  Industrial environments have finite tolerance for disruption. This favors controls that can be overlaid with minimal coordination—even when foundational enforcement would reduce more risk.
+  Industrial environments have finite tolerance for disruption. This favors controls that can be overlaid with minimal coordination, even when foundational enforcement would reduce more risk.
 
 The result is not necessarily failure, but resource allocation patterns that optimize for **legibility and defensibility** more than **risk reduction**.
 
