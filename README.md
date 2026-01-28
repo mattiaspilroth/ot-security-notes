@@ -19,25 +19,21 @@ These notes describe patterns observed across multiple industrial organizations.
 
 OT security guidance is often written at a level of abstraction that assumes unlimited time, resources, and operational change capacity.
 
-In production environments, a predictable gap often emerges between **what can be demonstrated** (artifacts, metrics, assessments) and **what deterministically reduces operational risk**.
+In production environments, implementation must account for structural constraints:
 
-This is rarely about incompetence. More often it results from structural conditions that shape how security work is funded, sequenced, and sustained:
+- **Distributed implementation responsibility**  
+  Security requirements are often set centrally, while implementation depends on site teams with operational priorities and resource limitations.
 
-- **Distributed authority without centralized resources**  
-  Requirements are set centrally, but implementation relies on site teams with competing operational priorities and limited dedicated capacity.
+- **Finite operational change capacity**  
+  Industrial environments have limited tolerance for disruption. Controls must be implemented in ways that preserve production stability.
 
-- **Evidence-driven investment**  
-  Work gravitates toward controls that produce visible artifacts (dashboards, reports, compliance metrics) rather than controls that enforce boundaries or constrain access.
+- **Cross-domain coordination requirements**  
+  High-impact security controls often span IT and OT organizational boundaries, requiring coordination across different governance models and funding structures.
 
-- **Organizational boundary friction**  
-  High-impact controls often sit between IT governance and OT operations, where ownership, accountability, and funding can be unclear.
+- **Trade-offs between visibility and enforcement**  
+  Security architectures must balance the need for threat detection with the operational constraints of maintaining production systems.
 
-- **Limited operational change capacity**  
-  Industrial environments have finite tolerance for disruption. This favors controls that can be overlaid with minimal coordination, even when foundational enforcement would reduce more risk.
-
-The result is not necessarily failure, but resource allocation patterns that optimize for **legibility and defensibility** more than **risk reduction**.
-
-These notes document how that gap manifests in implementations, and what it implies for security architectures that must survive real operational constraints.
+These notes document how these constraints shape security implementations and what they imply for architectures that must function under real operational conditions.
 
 ## Notes
 
