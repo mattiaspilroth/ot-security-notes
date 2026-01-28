@@ -2,7 +2,7 @@
 
 Architectural reasoning and technical lessons learned while implementing OT security in large-scale industrial operations.
 
-The focus is how security controls behave over long operational lifecycles under real OT constraints, where availability, safety, and limited change capacity are primary design requirements.
+The focus is on how security controls behave over long operational lifecycles under real OT constraints, where availability, safety, and limited change capacity are primary design requirements.
 
 ---
 
@@ -34,9 +34,9 @@ In production environments, implementation must account for structural constrain
 
 - **Cross-domain coordination requirements**  
   High-impact security controls often span IT and OT organizational boundaries, requiring coordination across different governance models and funding structures.
-
+  
 - **Observability under operational constraints**  
-  Security architectures must enable sufficient visibility for detection and response without introducing monitoring complexity that exceeds operational capacity to maintain.
+  Security architectures must provide sufficient visibility for detection and response while avoiding monitoring complexity that exceeds operational capacity to maintain.
 
 These notes document how such constraints shape security implementations and what they imply for architectures that must function reliably over time.
 
