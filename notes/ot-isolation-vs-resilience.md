@@ -16,7 +16,6 @@ The problem is particularly acute when:
 
 This note describes one such failure and its architectural implications for environments that must balance segmentation with selective observability.
 
----
 
 ## The Problem: Silent Degradation Under Isolation
 
@@ -39,7 +38,6 @@ The issue was discovered only by chance when a technician noticed abnormal fan n
 
 From a reliability engineering perspective, this represents a classic *Common-Cause Failure (CCF)*, where redundant components fail due to shared firmware, lifecycle, and operating conditions rather than independent faults.
 
----
 
 ## Key Characteristics of the Failure
 
@@ -57,7 +55,6 @@ This failure mode had several notable properties:
 * **Detection by chance, not design**  
   Discovery relied on incidental human proximity rather than engineered observability.
 
----
 
 ## Architectural Implications
 
@@ -76,7 +73,6 @@ Key implications include:
 * Monitoring must consider aging, firmware defects, and correlated lifetimes
 * Absence of alarms is not evidence of health
 
----
 
 ## Observability Under Segmentation and Isolation Constraints
 
@@ -107,7 +103,6 @@ Visibility does not require full connectivity. Carefully scoped telemetry paths 
 
 From a risk perspective, this balance is not symmetrical. Segmentation and isolation tend to reduce exposure to low-probability, high-impact cyber events, while simultaneously increasing exposure to high-probability, high-impact operational failures if degradation remains unseen. Resilient architectures must reason about both risks explicitly rather than optimizing for only one.
 
----
 
 ## When This Pattern Applies
 
@@ -120,7 +115,6 @@ While this example involved virtualized OT infrastructure with shared storage, t
 
 The fundamental risk is the same: systems that cannot signal their own degradation will eventually fail silently, and redundancy does not eliminate risk when components share common failure causes.
 
----
 
 ## Summary
 
