@@ -4,7 +4,6 @@ Architectural reasoning and technical lessons learned while implementing OT secu
 
 The focus is on how security controls behave over long operational lifecycles under real OT constraints, where availability, safety, and limited change capacity are primary design requirements.
 
----
 
 ## What You'll Find Here
 
@@ -15,7 +14,6 @@ The focus is on how security controls behave over long operational lifecycles un
 
 **Not included:** site-identifying details, sensitive configurations, exploit instructions, or vendor-specific confidential information.
 
----
 
 ## Why These Notes Exist
 
@@ -40,7 +38,6 @@ In production environments, implementation must account for structural constrain
 
 These notes document how such constraints shape security implementations and what they imply for architectures that must function reliably over time.
 
----
 
 ## Notes
 
@@ -48,14 +45,12 @@ These notes document how such constraints shape security implementations and wha
 - [Isolation Is Not Resilience](./notes/ot-isolation-vs-resilience.md)
 - [OT Identity Architecture: Federation, PAM, and Resilience](./notes/ot-identity-architecture.md)
 
----
 
 ## Related Repositories
 
 - **[ot-trust-in-isolated-networks](https://github.com/mattiaspilroth/ot-trust-in-isolated-networks)**  
   PKI, certificate validation, and trust continuity under constrained or intermittent connectivity.
 
----
 
 ## Discussion
 
@@ -63,7 +58,6 @@ These notes are intended to support architectural reasoning and informed debate 
 
 If you have observed similar or different failure modes, or have refined these patterns in your own practice, feel free to open an Issue or Discussion to contribute to the dialogue.
 
----
 
 ## About This Work & Disclaimer
 
@@ -71,7 +65,6 @@ This repository documents architectural patterns and lessons learned from implem
 
 This work documents patterns observed across multiple industrial environments and reflects personal professional judgment. It does not represent the views, guidance, or policies of any current or former employer, and contains no site-specific, confidential, or proprietary information.
 
----
 
 ## Contact
 
