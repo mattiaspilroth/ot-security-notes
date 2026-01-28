@@ -1,5 +1,6 @@
 # OT Identity Architecture: Federation, PAM, and Resilience
 
+
 ## Purpose and Scope
 
 This note describes an identity architecture that reduces the operational burden of managing separate OT identity infrastructure while maintaining security boundaries and operational continuity.
@@ -15,7 +16,19 @@ This is not a universal implementation guide. The technical patterns and access 
 - Legacy systems coexist with modern federated identity capabilities
 - Break-glass access must remain viable under degraded conditions
 
+**What this note addresses:**
+- User and service authentication and authorization
+- Privilege elevation and access control
+- Trust boundaries between IT and OT identity infrastructure
+
+**What this note does not address:**
+- Broader operational roles of Active Directory (device identity, group policy, certificate services, Windows lifecycle management)
+- Endpoint hardening, network segmentation, or application-level authorization
+- Secure engineering of real-time control systems
+
 The approach is based on replacing infrastructure-level trust with protocol-level trust using OIDC and OAuth 2.0, combined with explicit privilege elevation controls and documented resilience mechanisms. The objective is to achieve strong security posture while maintaining manageable operational workload for OT organizations.
+
+Any implementation of these patterns requires context-specific risk assessment, security validation, and operational testing.
 
 ## The Problem: Operational Burden of Isolated Identity
 
@@ -45,7 +58,6 @@ If the IT forest is compromised, attackers may leverage:
 
 The result is degraded security through either passive management or reintroduced trust dependencies, undermining the boundary the separate forest was intended to create.
 
----
 
 ## The Shift: Protocol and Trust Model Change (OIDC / OAuth 2.0)
 
@@ -72,7 +84,6 @@ The OT environment asks:
 
 This protocol shift is the primary reason for the reduced attack surface.
 
----
 
 ## Access Plane Model
 
@@ -80,7 +91,6 @@ OT identity is best understood as three distinct access planes, each with a diff
 
 (See conceptual diagram: [OT Identity Access Planes and Trust Boundaries](../diagrams/identity-access-planes.md))
 
----
 
 ## 1. Operational Access Plane (Default)
 
@@ -122,7 +132,6 @@ To preserve resilience:
 - Time synchronization must not depend on continuous connectivity to IT or external services
 - Acceptable clock skew should be explicitly defined and tested
 
----
 
 ## 2. Privileged Access Plane (Controlled)
 
@@ -156,7 +165,6 @@ In PAM-based models:
 
 This prevents credential harvesting even if a user’s IT workstation is compromised.
 
----
 
 ## OIDC and PAM Integration Patterns
 
@@ -169,7 +177,6 @@ OIDC remains the primary identity source, while PAM or MFA enforces privilege el
 - Credentials are isolated, rotated, and hidden from users
 - Suitable for legacy OT platforms and Windows-based environments
 
----
 
 ### Pattern B: OIDC with Strong MFA for Privileged Scopes
 
@@ -181,7 +188,6 @@ OIDC remains the primary identity source, while PAM or MFA enforces privilege el
 
 Push notifications or SMS-based MFA are insufficient for this risk profile.
 
----
 
 ### Pattern Selection and Hybrid Approaches
 
@@ -199,7 +205,6 @@ Many environments implement hybrid approaches where:
 The architectural objective is to minimize infrastructure-level trust and 
 credential exposure, not to achieve uniform implementation across all systems.
 
----
 
 ## 3. Resilience and Break-Glass Plane (Exceptional)
 
@@ -221,7 +226,6 @@ The transition to the Resilience Plane must be governed by clearly defined trigg
 
 This prevents resilience mechanisms from being used for convenience or performance issues.
 
----
 
 ### Resilience-Dominant Environments
 
@@ -229,7 +233,6 @@ In highly isolated OT environments or where safety requirements prohibit depende
 
 This represents an explicit architectural trade-off where availability and safety outweigh the benefits of centralized identity services.
 
----
 
 ## Identity Lifecycle and Termination Risk
 
@@ -246,7 +249,6 @@ This risk should be addressed through context-appropriate measures such as:
 
 This residual risk is an explicit design trade-off: limited, auditable identity persistence is accepted to preserve safety and operational continuity under degraded conditions.
 
----
 
 ## Privileged Access and MFA Requirements
 
@@ -262,7 +264,6 @@ This prevents credential replay, phishing-based escalation, and trust abuse.
 
 Where technical or safety constraints prevent implementation of hardware-backed MFA, compensating controls and explicit risk acceptance are required.
 
----
 
 ## Trust Anchor and Root of Trust
 
@@ -276,26 +277,6 @@ This architecture distinguishes between:
 
 This distinction is critical for regulatory, safety, and resilience assessments.
 
----
-
-## Scope and Limitations
-
-This model addresses:
-- User and service authentication and authorization
-- Privilege elevation and access control
-- Trust boundaries between IT and OT
-
-This note focuses on identity and access architecture for users and services. It does not describe the broader operational role of Active Directory in OT environments, such as device identity, group policy management, certificate services, or Windows lifecycle management. These functions may remain in a local OT AD forest even when user authentication is federated.
-
-It does not replace:
-- Endpoint hardening
-- Network segmentation
-- Application-level authorization logic
-- Secure engineering of real-time control systems
-
-Any implementation of these patterns requires context-specific risk assessment, security validation, and operational testing.
-
----
 
 ## Summary
 
