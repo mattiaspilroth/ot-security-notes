@@ -2,7 +2,7 @@
 
 Architectural reasoning and lessons learned from implementing security in large-scale industrial operations.
 
-This repository examines how security controls behave over long operational lifecycles in production OT environments, where availability, safety, and limited change capacity are hard design constraints rather than priorities.
+This repository examines how security controls behave over long operational lifecycles in production OT environments, where availability, safety, and limited change capacity are hard design constraints rather than tunable priorities.
 
 
 ## Principles and Scope
@@ -10,17 +10,13 @@ This repository examines how security controls behave over long operational life
 These notes follow several guiding principles for evaluating security in production OT environments:
 
 - **Architecture over compliance**
-Design trade-offs and system behaviors rather than control checklists.
+Design trade-offs, system behavior, and failure modes rather than control checklists.
 
 - **Operational reality**
 Failure modes and long-term degradation patterns observed in production environments.
 
 - **Structural constraints**
 Why common IT assumptions around patching, refresh cycles, and centralized management do not hold in OT.
-
-- **Architectural reasoning**
-Diagrams and written analysis intended to support durable decision-making and stakeholder communication.
-
 
 ## Operational Reality
 
@@ -48,8 +44,8 @@ These notes explore how such gaps influence real-world security outcomes.
 
 ## Notes
 
-- [Why OT Infrastructure Appears Static](./notes/ot-infrastructure-appears-static.md)
-- [Isolation Is Not Resilience](./notes/ot-isolation-vs-resilience.md)
+- [Why OT Infrastructure Appears Static](./notes/why-ot-infrastructure-appears-static.md)
+- [Silent Degradation under IT/OT Convergence](./notes/silent-degradation-under-convergence.md)
 - [OT Identity Architecture: Federation, PAM, and Resilience](./notes/ot-identity-architecture.md)
 
 
@@ -61,18 +57,18 @@ These notes explore how such gaps influence real-world security outcomes.
 
 ## Discussion
 
-These notes are intended to support architectural reasoning and informed debate rather than prescribe fixed solutions.
+These notes are intended to support informed architectural debate rather than prescribe fixed solutions.
 
 If you have observed similar or different failure modes, or have refined these patterns in your own practice, feel free to open an Issue or Discussion.
 
 
 ## About and Disclaimer
 
-This repository contains notes on architectural patterns and lessons learned from implementing OT security in high-consequence industrial production environments.
+This repository contains architectural analysis and practitioner observations derived from hands-on work securing OT systems in high-consequence industrial production environments.
 
-It reflects personal professional judgment informed by direct implementation experience and observations across multiple industrial environments. It does not represent the views, guidance, or policies of any current or former employer, and contains no site-specific, confidential, or proprietary information.
+The material reflects the author’s professional judgment and implementation experience across multiple industrial contexts. It is published in an independent capacity and does not represent the views, guidance, or policies of any current or former employer.
 
-**Not included:** site-identifying details, sensitive configurations, exploit instructions, or vendor-specific confidential information.
+No site-identifying details, sensitive configurations, exploit instructions, or vendor-confidential information are included.
 
 
 ## Contact
