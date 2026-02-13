@@ -47,9 +47,6 @@ These notes explore how such gaps influence real-world security outcomes.
   Explainer for IT and cybersecurity professionals on operational constraints in process industries.
 
 ### Technical Analysis
-- [Long-Lifecycle OT: Stability as Engineered Outcome](./notes/stability-as-engineered-outcome.md)  
-  Why stability in high-consequence OT reflects rational engineering, not stagnation.
-
 - [Silent Degradation under IT/OT Convergence](./notes/silent-degradation-under-convergence.md)  
   How isolation can conceal degradation and observability challenges in converged environments.
 
