@@ -120,12 +120,11 @@ Degradation is time-dependent and invisible to point-in-time audits.
 
 ### Storage Controller Degradation
 
-In one OT virtualized environment designed for high availability:
+In one OT virtualized environment designed for high availability.
 
-- Compute hosts were redundant  
-- Storage provided hardware-level redundancy  
-- Services ran across multiple virtual machines  
-- The environment was tightly segmented  
+The environment was designed for high availability: redundant compute
+hosts, hardware-level storage redundancy, services distributed across
+virtual machines, and tight network segmentation.
 
 On paper, the design appeared resilient.
 
