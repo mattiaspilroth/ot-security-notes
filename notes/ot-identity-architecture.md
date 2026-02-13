@@ -193,7 +193,9 @@ If one system mishandles claims, containment collapses.
 
 All models degrade.
 
-This follows the pattern explored in *Silent Degradation under IT/OT Convergence*: controls that depend on cross boundary coordination erode under operational pressure.
+This follows the pattern explored in [Silent Degradation under IT/OT Convergence](./silent-degradation-under-convergence.md):
+controls that depend on cross-boundary coordination erode under
+operational pressure.
 
 ## What Shifts, and What Does Not
 
