@@ -1,188 +1,213 @@
 # Why OT Infrastructure Appears Static: A Process Industry Perspective
 
-## 1. Purpose and Scope
+Industrial control systems in chemical plants, refineries, and power generation often appear static to IT and cybersecurity teams. Systems run for decades. Patch levels lag. Legacy platforms remain in service long after vendor support ends. Change is slow and frequently deferred.
 
-This note is written for IT and cybersecurity professionals and explains why certain operating assumptions and decision patterns persist in Operational Technology (OT) environments, particularly within chemical and other continuous process industries.
+From outside the operating context, this can appear irrational. From inside, it is predictable. The behavior follows directly from how these systems were funded, validated, and operated.
 
-Its purpose is to explain the historical constraints, lifecycle realities, and risk trade-offs under which many industrial control systems were designed, procured, deployed, and operated. Much of what is described reflects operating conditions shaped in an era when process control networks were treated as isolated, vendor-supported production systems.
+Validated configurations define liability boundaries.
+Asset lifecycles are measured in decades.
+Failure consequences in continuous processes are non-linear and often disproportionate to the initiating event.
 
-The threat landscape has evolved. The technical estates, contractual structures, and resourcing models established under earlier assumptions largely have not. When viewed outside their operating context, this inherited reality can appear static.
+Many installations were commissioned under assumptions of isolation. Isolation is no longer viable. The structures remain.
 
+Understanding apparent inertia requires understanding the constraints that produced it and that continue to shape which forms of change are viable.
 
-## 2. Different Optimization Problems
+**Scope:** This document focuses on continuous process industries and other high-consequence environments where disturbances can cascade into physical outcomes. Discrete manufacturing and lower-consequence operations may face different trade-offs.
 
-IT and OT systems were optimized for fundamentally different outcomes. While cybersecurity is increasingly incorporated into modern OT design, many long-lived control systems still reflect earlier optimization targets.
 
-IT systems typically prioritize agility, scalability, and continuous improvement. They operate in environments designed to change frequently with rollback capability and recoverability through redundancy. OT systems in continuous process operations were optimized for safety, deterministic behavior, high availability of physical processes, and efficient production within specification. Predictability mattered more than adaptability. Timing precision often mattered more than throughput.
 
-Industrial control systems deployed in the 1990s and early 2000s were designed as islands of automation. Enterprise connectivity was limited or absent, remote access was tightly governed, and risk models centered on hazards observable in day-to-day operations: equipment failures, operator error, and process upsets. Cyber intrusion was not treated as a credible initiating cause in industrial risk assessments.
+## 1. Different Optimization Problems
 
-This assumption, that physical and functional isolation was sufficient security, shaped the technical estates, contractual structures, and resourcing models that many organizations inherited and still operate within today.
+IT and OT evolved under different definitions of success.
 
+IT environments prioritize adaptability, rapid change, scalability, and frequent refresh. Recovery is supported by rollback, replacement, and elastic capacity. Failure is serious but usually bounded.
 
-## 3. The Appliance Model: Procuring Function, Not Platform
+OT systems in continuous operations prioritize deterministic behavior, safety, and sustained availability of the physical process. Predictability is often more valuable than flexibility. Timing precision can matter more than throughput.
 
-A fundamental distinction lies in what is being procured. In IT, organizations typically purchase a platform and the authority to configure it. In OT, particularly in process and chemical operations, organizations often purchase a **validated function**.
+Control systems widely deployed in the 1990s and early 2000s were engineered as largely self-contained islands. Enterprise connectivity was limited. Remote access was tightly governed. Risk models centered on equipment failure, process upset, and human error. Cyber intrusion was rarely considered a credible initiating cause.
 
-Control systems are often delivered as integrated solutions in which the operating system, firmware, drivers, and applications together form a **validated configuration**. This is not a cultural preference but a contractual and liability boundary tied to:
-- Warranty and liability: Unauthorized modification can void warranties and shift responsibility for failures to the operator  
-- Functional safety assumptions: Changes may undermine the safety arguments used to justify hazardous operation  
-- Vendor-controlled lifecycles: Patch and upgrade timing is frequently dictated by the vendor  
+Isolation therefore became a working assumption. Contracts, support models, and responsibilities formed around it. Many still persist.
 
-The result is a **structural tension**: operators bear the availability and safety consequences, while vendors retain significant influence over technical change.
 
-In IT, organizations own and control the platform, whereas in OT they typically operate a certified appliance.
 
-This model emerged as asset owners transferred integration risk and liability to automation vendors with specialized expertise. Vendors constrained their liability by defining validated system boundaries.
+## 2. Validated Functions, Not Configurable Platforms
 
-This procurement model has direct security implications. Operators frequently cannot assess exposure independently, cannot apply patches without vendor validation, and cannot modify configurations without voiding warranties. The appliance model, rational under isolation assumptions, becomes a structural constraint when those assumptions no longer hold.
+In IT, organizations buy platforms intended to be modified.
 
+In OT process control, organizations buy validated functions.
 
-## 4. Organizational Resourcing and Funding Models
+Operating systems, firmware, drivers, applications, and hardware together form a certified configuration. That boundary is also legal and financial.
 
-### 4.1 Project Delivery Versus Operational Ownership
+* Unauthorized modification can void warranty and support
+* Responsibility for outcomes can shift to the operator
+* Patch and upgrade timing is usually governed by vendor validation cycles
 
-OT systems in chemical facilities have historically been funded and delivered as capital projects rather than continuously evolving platforms. This model separates those who design the system from those who bear operational consequences when it fails.
+This model allowed asset owners to transfer integration risk to specialists. Under isolation assumptions, it worked well.
 
-A common pattern involves:
-1. Capital investment justified by production, yield, or regulatory drivers
-2. Design and commissioning by an internal team, engineering contractor, or vendor
-3. Handover to operations and maintenance
-4. Dissolution of the project organization
+In a connected environment, it becomes a constraint. Operators may have limited authority to change what they nevertheless remain accountable for operating.
 
-Post-commissioning support is typically limited to reactive maintenance and vendor escalation for system issues. On-site personnel are resourced to operate the process within specification and respond to instrumentation faults. They are generally not resourced to redesign infrastructure, independently manage platform lifecycles, or implement continuous security improvements.
 
-Operational performance metrics reinforce this resourcing gap. Typical OT metrics traditionally emphasize availability, mean time between failures (MTBF), and process stability. Security and modernization objectives are often driven externally and face structural headwinds when they do not align with these established performance metrics, regardless of their technical merit. A system that produces safely and reliably is considered operationally healthy, regardless of its patch level or technical debt.
 
+## 3. Control Systems as Operational Equipment
 
-### 4.2 Competence Continuity and Repairability
+These dynamics shaped how control systems entered operational culture.
 
-Another factor that has long shaped operational practice is competence continuity.
+PLCs, servers, and HMIs were treated as machine components rather than software estates. If a system performed its function, there was little incentive to alter it. Infrastructure layers remained largely invisible until failure made them relevant.
 
-Maintenance teams develop deep familiarity with:
-- Specific system versions  
-- Known failure behaviors  
-- Established diagnostic practices  
+Once commissioned within a validated envelope, stability became the default expectation. Change was evaluated primarily by process impact, not by technical currency.
 
-This familiarity directly affects mean time to repair, particularly during abnormal or high-pressure situations.
+Modern cybersecurity depends on visibility into layers that historically drew attention only when they broke.
 
-Modernizing infrastructure without equivalent investment in competence development typically can:
-- Increase diagnostic uncertainty  
-- Prolong recovery  
-- Reduce confidence during fault handling  
 
-From an operational risk perspective, a known and repairable system may be preferable to a technically superior but unfamiliar one.
 
+## 4. Stability as a Safety and Economic Strategy
 
-## 5. Stability as a Safety and Economic Strategy
+### 4.1 Asymmetric Failure Costs
 
-### 5.1 Asymmetric Failure Costs in Continuous Processes
+Continuous processes bind control behavior directly to hazardous and thermodynamically complex operations.
 
-In chemical and process industries, control systems are directly coupled to continuous physical processes involving hazardous materials, high temperatures and pressures, and complex reaction chemistry.
+An interruption can mean emergency shutdowns, flaring, product diversion, extended restart sequences, off-spec production, and mechanical stress from thermal cycling. The cost curve is rarely linear.
 
-An unplanned stop is not merely lost production. It can trigger:
-- Emergency shutdowns requiring product diversion, quenching, flaring, or dump-to-safe-state actions
-- Extended stabilization periods lasting days or weeks, often with off-spec or low-quality product
-- Equipment stress from thermal and pressure cycling
+Disturbing a working system offers limited benefit and clear exposure.
 
-This differs fundamentally from discrete manufacturing, where production loss is often proportional to outage duration. In continuous operations, a poorly timed stop can result in non-linear and prolonged impact.
+The bias toward leaving stable systems untouched is reinforced by lived consequence.
 
-Under these conditions, change to a functioning system offered:
-- No operational upside when targets were already met  
-- Significant downside risk due to disruption potential  
-- No perceived security benefit under isolation-based threat models  
+### 4.2 Determinism and Timing
 
-Avoiding change unless driven by failure, regulation, or capacity need became a rational default, reinforced by decades of incident history.
+Many OT functions depend on predictable execution.
 
+Small timing deviations tolerated in enterprise IT can trigger watchdogs, communication loss, or protective responses in industrial control. Availability therefore means correct action at the correct moment, not merely uptime.
 
-### 5.2 Timing Sensitivity and Determinism
+Activities that introduce uncertain interaction are judged accordingly.
 
-Certain OT systems are sensitive not to throughput loss but to timing variation. This is particularly true for deterministic control loops, safety instrumented systems, and legacy serial-to-Ethernet gateways where precise timing is a functional requirement.
+### 4.3 Transient Risk During Change
 
-In IT, minimal jitter typically results in graceful degradation. In OT, similar jitter can:
-- Trigger watchdog timeouts  
-- Disrupt I/O synchronization  
-- Initiate emergency stops  
+Change increases uncertainty.
 
-Availability in OT therefore means deterministic behavior at the expected time and sequence, rather than system uptime alone.
+Rollback can be complex. Diagnostics can be incomplete. Multiple parties may be active simultaneously. In high-consequence environments, this window carries significant weight.
 
-This sensitivity explains why active scanning or agent-based monitoring may be perceived as uncontrolled interference rather than benign observability.
+When implementation risk is immediate, concrete, and borne by the team
+making the change, while the security benefit is preventive and
+conditional on a threat scenario that may never materialise locally,
+postponement is the predictable outcome.
 
+The conditions required for safe execution may be rare and tied to shutdowns, specialist availability, or extensive preparation. In many organizations, the backlog grows faster than the capacity to retire it.
 
-### 5.3 Lifecycle Duration Mismatch
+### 4.4 Lifecycle Duration
 
-Lifecycle expectations have historically differed significantly between IT and OT environments.
+Enterprise infrastructure expects renewal within years.
+Industrial infrastructure is expected to serve for decades.
 
-Typical IT lifecycles:
-- 3 to 5 years  
+End of support and end of use diverge. Replacement depends on capital cycles, outage timing, and vendor qualification paths. Independent upgrades may invalidate support.
 
-Typical OT lifecycles in process industries:
-- 15 to 30 years  
+Long persistence follows from these mechanics.
 
-This mismatch created several structural challenges:
-- End-of-support rarely aligned with end-of-use  
-- Upgrade paths were infrequent and disruptive  
-- Replacement required operational justification, not technical preference  
 
-Many systems deployed under these lifecycle assumptions remain in operation, where observed stability reflects economic constraints rather than technical preference.
 
+## 5. Capital Projects and Operational Ownership
 
-## 6. Machine Components, Not IT Platforms
+### 5.1 Project Delivery
 
-These physical and economic constraints shaped the mental models of those who operate and maintain these systems.
+Major OT systems are usually delivered through capital projects. After commissioning, responsibility transfers to operations teams focused on continuity and repair.
 
-Control systems were conceptualized as components of a machine, not as evolving platforms. A PLC, HMI, or control server was treated much like a pump or valve. If it performed its function correctly, there was no intrinsic reason to modify it.
+These teams are rarely funded or staffed to function like product engineering organizations driving continuous evolution.
 
-Underlying infrastructure, including operating systems, firmware, and network configuration, was deliberately abstracted away. From an operational perspective, the system boundary ended at the human-machine interface. Infrastructure became visible primarily when it failed. When it worked, it was invisible.
+Performance indicators emphasize availability and stability. A system that runs safely is considered successful, even if it is aging.
 
-Once a system was commissioned and validated to operate safely within a defined envelope, stability became the dominant objective. Modifications were evaluated primarily by their potential impact on the physical process, not by software lifecycle considerations.
+### 5.2 Competence and Recovery
 
-Consequently, patching and upgrades were typically aligned with decade-long equipment replacement cycles rather than applied continuously. Modern cybersecurity now requires visibility into and management of infrastructure layers that were intentionally kept opaque to preserve vendor accountability and operational focus.
+Local familiarity with known behavior strongly influences restoration speed. Introducing new technology without equal investment in competence can extend outages.
 
+From this perspective, familiarity contributes directly to resilience.
 
-## 7. Security by Containment in High-Consequence Systems
 
-These factors shaped how security was initially implemented in OT environments, establishing patterns that continue to influence current practice.
 
-Because modifying assets, particularly at the control and I/O levels, introduced operational risk, security controls were historically implemented around control systems rather than within them. This containment-first approach naturally maps to zone-and-conduit thinking (e.g., IEC 62443), which is one reason it became a common starting point for OT security programs.
+## 6. Security by Containment
 
-Common approaches include:
-- Network segmentation and zoning  
-- DMZ architectures  
-- Strictly controlled remote access  
-- Formal change management  
+Because intervention inside validated assets is difficult, protection has typically been applied around them.
 
-The objective is to reduce blast radius while preserving validated system states. This containment-first mindset provides the baseline from which modern OT security must evolve, adding depth and adaptability without undermining the stability guarantees that high-consequence systems require.
+Segmentation, zoning, DMZ patterns, and strict access pathways aim to limit blast radius while preserving internal stability.
 
+This remains necessary.
 
-## 8. Consequence-Driven Risk Assessment
+It is also incomplete. Containment does not prevent misuse of legitimate access, supplier pathways, or failures that originate inside the boundary.
+Moreover, business requirements are systematically eroding isolation. Real-time production data, remote monitoring, predictive analytics, and cloud connectivity are no longer optional. Digital transformation demands integration, not separation.
 
-OT risk decisions are typically weighted by:
-- Severity of failure  
-- Safety and environmental impact  
-- Production and recovery consequences  
+Additional mechanisms are required, but they must fit what operations can realistically sustain and what the business requires to remain competitive.
 
-This contrasts with IT-centric risk models that emphasize likelihood, exploitability, and ease of remediation.
 
-In continuous process environments, consequences dominate decision making. A known and well-understood operational risk has historically been preferred over an uncertain cyber risk that could introduce unvalidated failure modes.
+## 7. From Patterns to Outcomes
 
-This logic continues to shape security control evaluation. Measures that increase uncertainty or complicate recovery may be rejected even if they appear advantageous from an IT perspective.
+### 7.1 When Descriptions Become Prescriptions
 
+The Purdue Enterprise Reference Architecture documented how industrial systems were structured: field devices, control layers, site operations, enterprise. It described existing reality. It did not prescribe security boundaries.
 
-## 9. Summary: Historical Decisions, Persistent Effects
+When OT security emerged as a discipline, Purdue was adopted as a segmentation template. Over time, description hardened into prescription. The map was mistaken for a wall.
 
-OT infrastructure often appears static because it reflects:
-- Safety and liability assumptions  
-- Long asset lifecycles  
-- Asymmetric failure costs  
-- Organizational models shaped by earlier operating realities  
+Modern environments have outgrown the model. Engineering workflows cross zones. Vendors require remote access. Cloud services, identity systems, and shared infrastructure create lateral paths the hierarchy does not represent. Compliance with the model no longer guarantees coverage against actual threats.
 
-The threat environment has changed. Many inherited structures have not yet fully adapted because they remain tied to contracts, staffing models, lifecycle economics, and the real consequences of operational change.
+### 7.2 Pattern Compliance vs Risk Reduction
 
-Stability, in this context, was not stagnation. It was an engineered outcome aligned with the risks operators were required to manage.
+Practices effective in one context do not automatically transfer to another. When attention centers on reproducing a template rather than addressing exposure, controls are selected for conformity rather than relevance.
 
-Modern security requirements now demand evolution. The threat environment no longer respects physical isolation, and the organizational structures built on isolation assumptions must adapt.
+Fixed zoning models, rigid traffic rules, and uniform baselines applied across dissimilar systems substitute pattern fidelity for risk analysis. Systems that cannot meet prescriptive templates are excluded rather than secured. Workarounds multiply.
 
-The challenge is not whether change is necessary, but how to implement security controls that respect the constraints documented in this note: long lifecycles, asymmetric failure costs, vendor-controlled validation boundaries, and limited operational change capacity.
+Security work must reconnect measures to credible threat paths, system behavior, and consequence. Patterns inform design. They do not replace engineering judgment.
 
-Success depends on aligning security improvements with planned shutdown windows, allowing extended validation periods, and preserving operational diagnosability. New security controls must be maintainable by site personnel without continuous vendor or central support. This requires different implementation methods than traditional IT security, but pursues the same security objectives.
+## 8. Consequence-Driven Decisions
+
+In OT, severity and recoverability dominate decision-making.
+
+Controls that complicate restoration encounter resistance regardless of
+their security merit. This is not irrational. During a process upset,
+the speed and confidence with which operators can restore safe
+operation determines whether an incident remains contained or escalates.
+
+Measures that improve resistance while keeping systems understandable
+are more likely to survive operational reality.
+
+The objective is sustainable reduction of exposure.
+
+## 9. Why the Situation Persists
+
+Long lifecycles, vendor validation regimes, funding structures, competence distribution, and asymmetric failure costs reinforce one another.
+
+The appliance model limits independent change. Capital delivery separates build from operate. Operational accountability favors caution. Transient exposure shapes timing. Resource limits constrain throughput.
+
+Slow change is not dysfunction. It is the rational equilibrium produced by these incentives.
+
+Misreading this equilibrium leads to security strategies that are elegant on paper and unimplementable in practice.
+
+## 10. Implications for Security Design
+
+The constraints described above are not arguments against improvement. They define the boundaries within which security architecture must function.
+
+### Favor durability
+
+Assume solutions must remain effective for decades.
+
+### Expect patch latency
+
+Design defenses that retain value when updates are slow.
+
+### Maintain diagnosability
+
+If operators cannot understand or restore it, it will not persist.
+
+### Extend beyond containment
+
+Perimeter measures are necessary but insufficient. Introduce detection, identity discipline, and recovery capability in forms that can be supported locally.
+
+### Align with operational time
+
+Enduring change follows maintenance and investment rhythms.
+
+## Moving Forward
+
+Security evolution is necessary.
+
+Progress depends on approaches that fit environments that are long-lived, consequence-sensitive, and operated by teams whose primary mandate is safe and continuous production.
+
+The goal is not to reproduce enterprise patterns. The goal is to achieve comparable or better risk outcomes using methods that can survive the life of the facility.
+
+Security in long-lifecycle environments is not a deployment problem. It is a durability problem.
