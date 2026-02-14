@@ -1,57 +1,37 @@
-# OT Security Notes
+# OT Security: Structural Constraints & Operational Reality
 
-Architectural reasoning and lessons learned from implementing security in large-scale industrial operations.
+This repository contains working notes on securing operational technology in high-consequence industrial environments.
 
-This repository examines how security controls behave over long operational lifecycles in production OT environments, where availability, safety, and limited change capacity are structural constraints, not tunable priorities.
+The ideas come from architecture work across production sites where long lifecycles, limited change capacity, and operational accountability shape what can be sustained over time.
 
-## Approach
+The central question:
 
-These notes follow several guiding principles:
+**Which security controls remain effective over decades in production OT, and which degrade predictably under operational pressure?**
 
-- **Architecture over compliance**  
-  Design trade-offs, system behavior, and failure modes rather than control checklists.
+These notes examine patterns observed in practice: what holds, what erodes, and the structural reasons why.
 
-- **Observed failure modes**  
-  Long-term degradation patterns and operational reality in production environments.
+## What you will find here
 
-- **Structural constraints**  
-  Why common IT assumptions around patching, refresh cycles, and centralized management do not hold in OT.
+**[Why OT Infrastructure Appears Static](./notes/why-ot-appears-static.md)**  
+Stability in continuous process industries is an engineered response to asymmetric risk, not technical stagnation. This note examines the constraints that make OT infrastructure resistant to change.
 
-## The Implementation Gap
+**[Silent Degradation Under IT/OT Convergence](./notes/silent-degradation-under-convergence.md)**  
+Redundant IT infrastructure introduced into segmented OT zones can degrade invisibly when health signals cannot reach operations teams. The gap is not telemetry; it is ownership.
 
-Much OT security guidance is developed under assumptions that do not fully reflect production environments.
+**[OT Identity Architecture: Federation, PAM, and Residual Risk](./notes/ot-identity-architecture.md)**  
+A framework for reasoning about identity patterns in OT. Examines the trade-offs between isolation, federation, and hybrid models, and why authority for high-consequence actions must remain local.
 
-In practice, implementation outcomes are shaped by structural constraints and gaps such as:
+Each note stands independently. Read in any order.
 
-- **Distributed implementation responsibility**  
-  Security intent is often defined centrally, while implementation depends on site teams with operational accountability and limited resources.
+## Perspective
 
-- **Finite operational change capacity**  
-  Production systems have limited tolerance for disruption. Controls that undermine repairability or stability tend to erode over time.
+These notes favor:
 
-- **Long asset lifecycles**  
-  OT systems commonly operate for decades, creating lifecycle mismatches with IT security planning assumptions.
+- Architectural reasoning over compliance checklists
+- Observed operational behavior over design intent
+- Long-term durability over short-term elegance
 
-- **Cross-domain governance boundaries**  
-  High-impact controls frequently span IT and OT organizational models, funding structures, and decision authority.
-
-- **Observability under operational constraints**  
-  Visibility is only sustainable when monitoring, alerting, and response can be maintained by local teams over time.
-
-These notes explore how such gaps influence real-world security outcomes.
-
-## Notes
-
-### Core Framework
-- [Why OT Infrastructure Appears Static: A Process Industry Perspective](./notes/why-ot-appears-static.md)  
-  Explainer for IT and cybersecurity professionals on operational constraints in process industries.
-
-### Technical Analysis
-- [Silent Degradation under IT/OT Convergence](./notes/silent-degradation-under-convergence.md)  
-  How isolation can conceal degradation and observability challenges in converged environments.
-
-- [OT Identity Architecture: Federation, PAM, and Resilience](./notes/ot-identity-architecture.md)  
-  Three access planes model and identity architecture adapted to industrial constraints.
+The goal is useful analysis, not comprehensive coverage.
 
 ## Related Repositories
 
@@ -60,19 +40,12 @@ These notes explore how such gaps influence real-world security outcomes.
 
 ## Discussion
 
-These notes are intended to support architectural reasoning rather than prescribe solutions.
+If you have observed different patterns, identified gaps in the reasoning, or have experience that challenges these conclusions, I would value hearing it. Open an issue or start a discussion.
 
-If you have observed similar or different failure modes, or have refined these patterns in your own practice, feel free to open an Issue or Discussion.
+## About
 
-## About and Disclaimer
+Written by **Mattias Pilroth**, working with OT security architecture across European chemical and process industry environments.
 
-This repository contains architectural analysis and practitioner observations derived from hands-on work securing OT systems in high-consequence industrial production environments.
+This is independent work based on professional experience. It does not represent employer positions and avoids sensitive or identifying details.
 
-The material reflects the author's professional judgment and implementation experience across multiple industrial contexts. It is published in an independent capacity and does not represent the views, guidance, or policies of any current or former employer.
-
-No site-identifying details, sensitive configurations, exploit instructions, or vendor-confidential information are included.
-
-## Contact
-
-- [LinkedIn](https://www.linkedin.com/in/mattiaspilroth)
-- [Email](mailto:mattias@pilroth.com)
+[LinkedIn](https://www.linkedin.com/in/mattiaspilroth)
