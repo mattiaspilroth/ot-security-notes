@@ -217,4 +217,3 @@ The goal is not to find the correct model. It is to choose where residual risk r
 ## Closing
 
 Identity in OT is not about elegance. It is about sustaining operational authority under stress for decades, and knowing where that authority will fail first.
-If you want, I can also create a **visually scannable diagram** showing Options A/B/C with risks and governance boundaries—this makes it much easier for managers or engineers to digest quickly. Do you want me to do that next?
