@@ -46,7 +46,7 @@ This model allowed asset owners to transfer integration risk to specialists. Und
 
 In a connected environment, it becomes a constraint. Operators may have limited authority to change what they nevertheless remain accountable for operating.
 
-
+Over time, this leaves asset owners dependent on the incumbent vendor not only for support, but for the practical ability to migrate away.
 
 ## 3. Control Systems as Operational Equipment
 
@@ -57,8 +57,6 @@ PLCs, servers, and HMIs were treated as machine components rather than software 
 Once commissioned within a validated envelope, stability became the default expectation. Change was evaluated primarily by process impact, not by technical currency.
 
 Modern cybersecurity depends on visibility into layers that historically drew attention only when they broke.
-
-
 
 ## 4. Stability as a Safety and Economic Strategy
 
@@ -120,7 +118,7 @@ Local familiarity with known behavior strongly influences restoration speed. Int
 
 From this perspective, familiarity contributes directly to resilience.
 
-
+At the same time, many of the individuals who commissioned and deeply understood these systems are retiring. Institutional knowledge transfers incompletely. The capability required to change environments safely is often declining while the demand for change is increasing.
 
 ## 6. Security by Containment
 
@@ -131,12 +129,15 @@ Segmentation, zoning, DMZ patterns, and strict access pathways aim to limit blas
 This remains necessary.
 
 It is also incomplete. Containment does not prevent misuse of legitimate access, supplier pathways, or failures that originate inside the boundary.
-Moreover, business requirements are systematically eroding isolation. Real-time production data, remote monitoring, predictive analytics, and cloud connectivity are no longer optional. Digital transformation demands integration, not separation.
+Business requirements are systematically eroding isolation. Real-time production data, remote monitoring, predictive analytics, and cloud connectivity are no longer optional. Digital transformation demands integration.
+
+How integration pressure alters feasible security models is a topic in its own right and is treated separately.
 
 Additional mechanisms are required, but they must fit what operations can realistically sustain and what the business requires to remain competitive.
 
-
 ## 7. From Patterns to Outcomes
+
+The constraints described above have not only shaped operations. They have also influenced, and at times distorted, the security models later applied to these environments.
 
 ### 7.1 When Descriptions Become Prescriptions
 

@@ -63,12 +63,12 @@ Segmentation and isolation are necessary security controls. They reduce attack s
 They also constrain how systems communicate their internal state.
 
 Isolation does not create degradation.  
-It ensures degradation remains invisible.
+Isolation often prevents degradation signals from reaching those who could act.
 
 
 ## Why the Pattern Repeats
 
-This is structural.
+The conditions that produce this outcome are structural.
 
 Converged infrastructure is typically delivered as part of a capital project. Success is defined by functional acceptance.
 
@@ -80,10 +80,9 @@ Acceptance criteria verify function. They rarely verify that infrastructure heal
 
 Infrastructure health monitoring that is not required for acceptance is treated as optional. Optional capabilities imply ongoing ownership. Ongoing ownership implies operational cost.
 
-Once commissioned, responsibility shifts to operations teams whose priority is continuity. Monitoring paths that cross segmentation or organizational boundaries require maintenance, tuning, and coordination. Over time, they degrade or are disabled.
+Once commissioned, responsibility typically shifts to operations teams whose priority is continuity. Monitoring paths that cross segmentation or organizational boundaries require maintenance, tuning, and coordination. Over time, they degrade or are disabled.
 
-By the time degradation becomes visible, redundancy has already been consumed.
-
+By the time degradation becomes visible, redundancy is often already reduced or exhausted.
 
 ## Recognizing the Pattern
 
@@ -196,6 +195,8 @@ Log collectors accumulate data useful for investigation after an incident but pr
 Health information exists.  
 Behavior does not change.
 
+In each case, the platforms assume sustained ownership and specialist capacity that many sites are neither funded nor organized to provide.
+
 ## Trade-offs and Architectural Reality
 
 The choice is not between comprehensive observability and isolation.
@@ -208,6 +209,8 @@ It is between:
 In some environments, the complexity introduced by observability outweighs the risk it mitigates. In others, silent degradation represents the dominant threat and must be addressed despite the implementation difficulty.
 
 Intermediate measures such as structured inspection routines, vendor maintenance agreements that include health verification, and physical walkdown procedures reduce exposure without requiring full instrumentation. They do not eliminate the pattern, but they narrow the window during which failure can accumulate undetected.
+
+They are effective only when systematic. Walkdowns require defined inspection points, documented thresholds, and clear responsibility for escalation. Maintenance agreements must detect latent faults and verify remaining capacity in redundant systems.
 
 There is no default-safe position.
 

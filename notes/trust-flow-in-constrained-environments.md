@@ -16,7 +16,7 @@ It does not prescribe a specific implementation.
 
 A trust architecture inside a constrained zone must allow validation to occur **predictably, repeatedly, and without improvisation**.
 
-If this cannot be guaranteed, drift toward exception handling is unavoidable.
+If this cannot be guaranteed, drift toward exception handling should be expected
 
 ## Required Properties of Survivable Trust
 
@@ -24,7 +24,7 @@ If this cannot be guaranteed, drift toward exception handling is unavoidable.
 
 Someone must be responsible for ensuring that trust material remains current, correct, and complete.
 
-Without ownership, decay is natural and invisible.
+Without ownership, decay progresses quietly when no one is accountable for detecting it.
 
 ### Curated and lifecycle-managed root authorities
 
@@ -33,9 +33,11 @@ Trust anchors cannot remain static for the lifetime of the installation, nor can
 Public root stores are optimized for broad compatibility.
 They include authorities unrelated to industrial operation and carry relationships that rarely align with organizational threat models or regulatory expectations.
 
-In high-consequence environments, trust scope must be deliberately constrained.
+Updates to public root stores can silently extend or withdraw trust relationships without operator awareness, potentially changing validation outcomes or breaking previously functioning systems.
 
-If root sets are not intentionally maintained, new artifacts will fail unpredictably and emergency imports will follow.
+In high-consequence environments, trust scope must be deliberately constrained. The method of achieving that constraint may vary.
+
+If root sets are not intentionally maintained, new artifacts will fail unpredictably. Under time pressure, emergency imports follow, establishing a pattern that rarely gets documented or reversed.
 
 ### Controlled and auditable distribution
 
@@ -47,15 +49,15 @@ If administrators transfer certificates ad hoc, governance loses visibility and 
 
 All elements required for validation, including chains, revocation information, and supporting metadata, must be obtainable within the zone at the moment they are required.
 
-Operation cannot depend on optional connectivity or best-effort reachability.
+Operation becomes fragile when it depends on optional connectivity or best-effort reachability.
 
-If availability is uncertain, bypass becomes routine.
+If availability is uncertain, bypass pressure increases and may become routine.
 
 ### Independence from external services
 
 Validation must succeed even if no connection to enterprise or internet resources exists.
 
-Any requirement for external resolution introduces dependency the architecture is designed to resist.
+Any requirement for external resolution introduces dependency that may conflict with the architecture’s isolation goals.
 
 ### Local completeness of validation paths
 
@@ -67,7 +69,9 @@ Partial information produces timeouts, workarounds, or relaxed enforcement.
 
 The architecture must define how validation behaves when expected inputs are missing.
 
-If behavior is undefined, local interpretation will replace policy.
+Examples include failing closed, failing open with compensating controls, or relying on time-bounded cached decisions. What matters is that behavior is defined rather than improvised.
+
+If behavior is undefined, local interpretation tends to replace policy.
 
 ### Ability to demonstrate runtime execution
 
@@ -83,10 +87,10 @@ Roots are imported manually.
 Revocation is disabled.
 Distribution points are ignored.
 Default trust programs are inherited without examination.
+Self-signed certificates proliferate as substitutes for managed trust.
 Exceptions accumulate without record.
 
-Systems continue to function, but assurance becomes increasingly fictional.
-In practice, tolerance has replaced assurance.
+Systems continue to function, but assurance becomes difficult to demonstrate at runtime. In practice, tolerance has replaced assurance.
 
 ## What These Properties Enable
 

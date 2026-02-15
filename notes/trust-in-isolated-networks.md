@@ -27,6 +27,8 @@ Connectivity is restricted. External services are absent. Automatic updates are 
 
 PKI becomes a runtime dependency on resources the environment is built to deny.
 
+While the examples here focus on certificate trust, the same structural dependency appears in licensing systems, name resolution, and time-based validation.
+
 ## Why Failure Looks Technical
 
 When validation cannot obtain what it needs, the error rarely presents as a trust decision.
@@ -54,8 +56,7 @@ Distribution points ignored.
 Trust stores frozen.
 Manual imports forgotten.
 
-Each step is locally rational.
-Together they transform cryptographic assurance into ceremony.
+Each step is locally rational. None trigger immediate consequences. Together they transform cryptographic assurance into ceremony.
 
 ## Enforcement Is Not Continuous
 
@@ -63,7 +64,9 @@ Together they transform cryptographic assurance into ceremony.
 
 Validation is frequently permissive.
 
-Failures are ignored or invisible. Dependencies accumulate quietly. The system appears healthy.
+Failures are ignored or invisible. Dependencies accumulate quietly. A service may fall back to cached decisions. A warning may be logged locally and never reviewed. Function continues while assurance erodes.
+
+The system appears healthy.
 
 This state can last for years.
 
@@ -102,6 +105,8 @@ What is missing is proof that these mechanisms execute reliably at runtime.
 Audits confirm structure.
 They cannot confirm behavior.
 
+Behavior can only be demonstrated through evidence that validation decisions occur during normal operation and produce enforceable outcomes, not merely exist as configuration.
+
 ## The Invisible Failure Mode
 
 Trust degradation is rarely urgent.
@@ -120,7 +125,7 @@ The issue is not that OT is isolated.
 
 The issue is that trust technologies are introduced whose survival depends on services isolation makes unreliable.
 
-When this mismatch exists, exception handling will gradually replace design.
+When this mismatch exists, exception handling gradually replaces design.
 
 ## Architectural Implication
 
