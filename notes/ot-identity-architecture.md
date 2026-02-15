@@ -1,296 +1,219 @@
-# OT Identity Architecture: Federation, PAM, and Resilience
+# OT Identity Architecture: Federation, PAM, and Residual Risk
 
+Stability in OT identity infrastructure reflects familiar OT constraints: long asset lifecycles, limited change capacity, and operational accountability that prioritizes continuity and diagnosability over policy compliance.
 
-## Purpose and Scope
+While modern identity architectures emphasize federation, centralized authentication, and dynamic authorization models, production OT environments impose structural limits on how far these models can be adopted without introducing new classes of risk. Identity controls in OT must remain viable over decades, operate under partial isolation, and degrade safely under failure conditions.
 
-This note describes an identity architecture that reduces the operational burden of managing separate OT identity infrastructure while maintaining security boundaries and operational continuity.
+This note examines common OT identity patterns, the risks they redistribute, and why no single model fully resolves the underlying tensions.
+It first compares three identity models, then examines federation scope, third-party authority, and residual risk.
 
-The patterns described here address a common problem: organizations create separate Active Directory forests for OT environments as a security measure, but then struggle with the operational reality of managing isolated identity infrastructure. This typically results in:
-- Credential sprawl and weak password practices
-- Delayed or incomplete lifecycle management (joiners, leavers, role changes)
-- Tension between security policy and operational usability
+## Identity as an Architectural Constraint in OT
 
-This is not a universal implementation guide. The technical patterns and access plane model are provided to support architectural decision-making in environments where:
-- OT availability and safety requirements constrain authentication dependencies
-- Regulatory frameworks require privilege segregation and audit logging
-- Legacy systems coexist with modern federated identity capabilities
-- Break-glass access must remain viable under degraded conditions
+In IT environments, identity systems are treated as continuously available, centrally governed services. They are assumed to be reachable, time-synchronized, and administratively coherent. Failures are disruptive but rarely safety-relevant.
 
-**What this note addresses:**
-- User and service authentication and authorization
-- Privilege elevation and access control
-- Trust boundaries between IT and OT identity infrastructure
+In OT environments, identity infrastructure is subject to additional constraints:
 
-**What this note does not address:**
-- Broader operational roles of Active Directory (device identity, group policy, certificate services, Windows lifecycle management)
-- Endpoint hardening, network segmentation, or application-level authorization
-- Secure engineering of real-time control systems
+* Connectivity may be intermittent or deliberately restricted
+* Time synchronization cannot be assumed as a universal invariant
+* Administrative authority is distributed across organizational boundaries
+* Recovery from failure must be possible without external dependencies
 
-The approach is based on replacing infrastructure-level trust with protocol-level trust using OIDC and OAuth 2.0, combined with explicit privilege elevation controls and documented resilience mechanisms. The objective is to achieve strong security posture while maintaining manageable operational workload for OT organizations.
+These constraints shape which identity patterns can be sustained in practice.
 
-Any implementation of these patterns requires context-specific risk assessment, security validation, and operational testing.
+## Common OT Identity Patterns
 
-## The Problem: Operational Burden of Isolated Identity
+### Option A: Fully Isolated Local Identities
 
-Traditional guidance recommends separate Active Directory forests for IT and OT. This boundary is architecturally sound but creates operational challenges.
+In this model, control systems authenticate users locally. Accounts are defined and managed per system or per site, often using local directories or embedded authentication mechanisms.
 
-A separate OT forest requires:
-- Dedicated expertise in Active Directory administration
-- Consistent lifecycle management (provisioning, deprovisioning, role changes)
-- Password policy enforcement and credential rotation
-- Group Policy maintenance and security patching
-- Break-glass procedure maintenance and testing
+**Strengths:**
 
-In practice, OT organizations rarely have dedicated identity management resources. The separate forest becomes passively managed, leading to:
+* No dependency on external identity providers
+* Predictable failure modes
+* High resilience under isolation
 
-- Weak or reused passwords due to lack of enforcement
-- Delayed user deprovisioning after role changes or termination
-- Orphaned accounts and unclear privilege assignments
-- Emergency accounts that become permanent workarounds
+**Limitations:**
 
-Organizations facing this operational burden sometimes introduce forest trusts or other authentication mechanisms between IT and OT to regain usability and reduce management overhead. While this addresses the immediate operational problem, it reintroduces infrastructure-level trust where authentication and authorization depend on Kerberos, NTLM, RPC, and directory relationships.
+* Poor scalability across sites or systems
+* Inconsistent access governance
+* Difficult to audit centrally
 
-If the IT forest is compromised, attackers may leverage:
-- Kerberos delegation and ticket abuse
-- NTLM relay and credential replay
-- Group Policy manipulation
-- Automated lateral movement tooling designed for Active Directory
+**Observed degradation patterns:**
 
-The result is degraded security through either passive management or reintroduced trust dependencies, undermining the boundary the separate forest was intended to create.
+Without sustained investment in local identity management, this model predictably degrades:
 
+* Weak or reused passwords
+* Delayed deprovisioning
+* Credentials written down or shared
+* Orphaned accounts
+* Break-glass access becoming routine
 
-## The Shift: Protocol and Trust Model Change (OIDC / OAuth 2.0)
+This model prioritizes availability and diagnosability but struggles to meet modern governance expectations.
 
-OIDC and OAuth 2.0 replace infrastructure-level trust with protocol-level trust.
+### Option B: Centralized Identity via Forest Trust or Shared Domain
 
-Instead of relying on Kerberos or NTLM, authentication and authorization are based on cryptographically signed JSON Web Tokens (JWTs).
+Here, OT systems rely on a central directory, typically through domain trust or shared forest membership.
+**In practice, this is the most common pattern in brownfield environments, often inherited from earlier infrastructure decisions rather than deliberately selected as an identity architecture.**
 
-Instead of asking:  
-“Is this user or machine part of my directory?”
+**Strengths:**
 
-The OT environment asks:  
-“Is this a valid, signed token issued by a trusted Identity Provider?”
+* Centralized policy enforcement
+* Unified lifecycle management
+* Improved auditability
 
-### Security Implications
+**Limitations:**
 
-- **Protocol replacement**
-  NTLM and Kerberos are replaced by JWTs signed using asymmetric cryptography.
+* Expands trust boundaries deeply into OT
+* Couples OT availability to IT directory health
+* Introduces systemic blast radius
 
-- **Claim-based trust**  
-  Trust is established through token signatures and claims, not shared infrastructure.
+**Infrastructure-level implications:**
 
-- **No implicit lateral trust**  
-  There is no RPC, directory replication, or Kerberos dependency between IT and OT.
+* Kerberos and delegation cross boundaries
+* NTLM relay paths propagate
+* Group Policy may traverse trusts
+* AD-native lateral movement tooling remains effective
+* Replication and RPC create standing connectivity
 
-This protocol shift is the primary reason for the reduced attack surface.
+If IT is compromised, pathways into OT exist by design.
 
+### Option C: Federated Identity with Privileged Access Management
 
-## Access Plane Model
+This model separates routine identity from high-consequence authority.
 
-OT identity is best understood as three distinct access planes, each with a different risk profile.
+Federation supports visibility, reporting, and low-risk interaction. Privilege is mediated through PAM, jump hosts, or local controls. In some environments, operator control remains entirely non-federated.
 
-(See conceptual diagram: [OT Identity Access Planes and Trust Boundaries](../diagrams/identity-access-planes.md))
+**What federation means:**
 
+Authentication is based on cryptographically signed assertions rather than shared directory infrastructure. OT validates the signature, not the provider runtime.
 
-## 1. Operational Access Plane (Default)
+**Strengths:**
 
-This plane covers the majority of OT access use cases.
+* Central lifecycle control
+* MFA enforcement
+* No Kerberos or replication dependency
+* Fast revocation
 
-Typical users and systems:
-- Operators
-- Engineers with read or limited write access
-- Monitoring and visualization systems
-- Historians and analytics platforms
-- Vendor support in non-privileged roles
+**Limitations:**
 
-Characteristics:
-- Federated authentication via OIDC / OAuth 2.0 where operationally feasible
-- Claim-based authorization using scopes or roles
-- No standing administrative privileges on OT operating systems
-- No directory-level trust between IT and OT
+* New dependency on IdP integrity
+* Requires durable token and key management
+* Dependent on downstream enforcement
+* Limited applicability in brownfield environments where legacy applications lack token support or cannot be modified within vendor validation constraints
 
-### Offline Validation and Availability
+This is a balancing model, not a perfect one.
 
-To meet OT availability requirements:
+## What Federation Solves
 
-- OT systems validate JWTs using the Identity Provider’s public keys
-- Public signing keys are cached locally in the OT environment
-- Short IT network interruptions do not immediately disrupt operator access
+Federation addresses real operational and security problems that other models leave unresolved.
 
-This ensures operational continuity without weakening security.
+**Credential hygiene:**
 
-For continuously staffed operator environments, federated identity must govern session establishment and authorization, not the real-time continuity of an operator’s interaction with a running process. Once authenticated, operator sessions must remain valid across short-lived outages of identity infrastructure or network connectivity.
+* Reduces password reuse
+* Reduces weak memorized credentials
+* Limits note-based storage
+* Reduces shared identities
 
-Re-authentication should occur only on session termination, privilege elevation, or explicit lock conditions, ensuring that identity service disruptions cannot inadvertently alter operator ability during normal operation.
+**Lifecycle management:**
 
-### Time Dependency and Local Validation
+* Rapid revocation
+* Consistent deprovisioning
+* Central MFA
+* Unified audit
 
-JWT validation relies on accurate time to evaluate token validity. In isolated or intermittently connected OT environments, unmanaged clock drift can result in legitimate access being denied.
+**Reduced infrastructure coupling:**
 
-To preserve resilience:
-- OT environments must maintain a reliable local time source
-- Time synchronization must not depend on continuous connectivity to IT or external services
-- Acceptable clock skew should be explicitly defined and tested
+Unlike forest trust, OT does not depend on Kerberos or replication.
 
+These are significant operational improvements.
 
-## 2. Privileged Access Plane (Controlled)
+## Scoping Federation: Where the Boundary Goes
 
-Administrative actions represent a higher risk profile and require explicit elevation.
+Federation can assert identity without granting process authority.
 
-Examples:
-- OT server and workstation administration
-- Active Directory, PKI, or firewall configuration
-- System-level application changes
-- Emergency maintenance activities
+It can reasonably support:
 
-Characteristics:
-- Access mediated through a PAM solution or equivalent control
-- Privileges are:
-  - Just-in-time
-  - Time-limited
-  - Session-recorded
-  - Explicitly approved where applicable
-- No standing administrator accounts tied directly to personal IT identities
+* Read-only views
+* Historians
+* Analytics
+* Documentation access
+* Personalization
 
-This access model addresses remote administrative access mediated through PAM from IT networks. Direct physical access to OT systems for maintenance or emergency scenarios falls under the Resilience Plane, not this access model.
+Actions that change plant state require additional layers reflecting accountability, context, and risk. Where consequence is asymmetric, authority remains local.
 
-### Administrative Footprint Control
+## Third-Party and Vendor Access: Where Authority Must Remain Local
 
-In PAM-based models:
+External parties perform a large portion of privileged activity in OT.
 
-- Users authenticate to PAM using federated identity and strong MFA
-- PAM maps users to privileged technical accounts in OT
-- Users never know or handle the passwords of OT administrative accounts
-- Privileged credentials never leave the PAM boundary
+Connectivity is often delivered by IT, but responsibility for outcome remains with the site. Federation can identify the individual, but it cannot determine whether the action is safe.
 
-This prevents credential harvesting even if a user’s IT workstation is compromised.
+PAM becomes the authority boundary.
 
+**PAM provides:**
 
-## OIDC and PAM Integration Patterns
+* Local approval
+* Context-aware authorization
+* Session control
+* Ability to terminate unsafe activity
+* Emergency mechanisms with accountability
 
-OIDC remains the primary identity source, while PAM or MFA enforces privilege elevation discipline.
+These capabilities require someone present and attentive. Active supervision is common during commissioning and exceptional during routine maintenance. The resulting gap follows the same ownership dynamics seen in infrastructure monitoring.
 
-### Pattern A: OIDC + PAM with Technical Accounts
+Without local authority, responsibility and control diverge. Risk accumulates.
 
-- User authenticates to PAM using OIDC with hardware-backed MFA
-- PAM brokers access using dedicated OT technical accounts
-- Credentials are isolated, rotated, and hidden from users
-- Suitable for legacy OT platforms and Windows-based environments
+## Residual Risk and Risk Redistribution
 
+Each identity pattern redistributes risk rather than eliminating it.
 
-### Pattern B: OIDC with Strong MFA for Privileged Scopes
+| Risk dimension        | Option A (Local) | Option B (Forest Trust) | Option C (Federation + PAM)         |
+| --------------------- | ---------------- | ----------------------- | ----------------------------------- |
+| Primary concentration | Site discipline  | IT directory integrity  | IdP integrity and scope enforcement |
+| Blast radius          | Local            | Cross-boundary systemic | Contained if scoped                 |
+| Governance burden     | Entirely site    | Split                   | Split differently                   |
+| Typical failure       | Credential decay | Lateral movement        | Claim misuse                        |
+| Long-term drift       | Predictable      | Silent and wide         | Dependent on enforcement            |
 
-- OIDC tokens are accepted directly by OT systems that support modern authentication
-- Privileged scopes require:
-  - Explicit re-authentication
-  - Hardware-backed, phishing-resistant MFA such as FIDO2
-- Suitable for modern OT applications, APIs, and engineering tools
+### Identity Provider Compromise
 
-Push notifications or SMS-based MFA are insufficient for this risk profile.
+A compromised IdP can mint tokens at scale. If federation is limited to visibility, exposure differs from infrastructure trust compromise.
 
+### Downstream Enforcement Fragility
 
-### Pattern Selection and Hybrid Approaches
+If one system mishandles claims, containment collapses.
 
-Pattern selection depends on:
-- OT system authentication capabilities
-- Organizational PAM maturity
-- Legacy system constraints
-- Vendor support boundaries
+### Governance Decay
 
-Many environments implement hybrid approaches where:
-- Modern OT applications use Pattern B (direct OIDC with strong MFA)
-- Legacy Windows systems use Pattern A (PAM with technical accounts)
-- Isolated safety systems may require neither pattern
+All models degrade.
 
-The architectural objective is to minimize infrastructure-level trust and 
-credential exposure, not to achieve uniform implementation across all systems.
+This follows the pattern explored in [Silent Degradation under IT/OT Convergence](./silent-degradation-under-convergence.md): controls that depend on cross-boundary coordination erode under operational pressure.
 
+## What Shifts, and What Does Not
 
-## 3. Resilience and Break-Glass Plane (Exceptional)
+**Option A:** All burden remains local. Maximum autonomy, maximum workload, maximum governance fragility.
 
-OT environments require a fallback mechanism when federated identity or PAM dependencies are unavailable.
+**Option B:** Identity management shifts to central IT. OT retains operational accountability but cedes identity authority. The blast radius of IT compromise expands into OT by design.
 
-Characteristics:
-- Local OT Active Directory accounts or local system accounts
-- Fully isolated from IT and external identity providers
-- Access restricted to predefined emergency scenarios
-- Credentials stored securely and tested regularly
-- Mandatory post-event review and audit
+**Option C:** Routine identity governance shifts centrally. Privilege elevation and consequence management remain local. New operational dependencies (IdP availability, time synchronization, key rotation) are introduced.
 
-### Formal Trigger Conditions
+In every model, OT must retain the ability to operate safely when external systems fail. This is not a preference—it is a safety requirement.
 
-The transition to the Resilience Plane must be governed by clearly defined triggers, such as:
-- Loss of federated identity services beyond defined thresholds
-- Cyber incident response scenarios
-- Safety-critical operational continuity events
+## This Is Not a Solvable Problem
 
-This prevents resilience mechanisms from being used for convenience or performance issues.
+No identity architecture eliminates the tension between centralized governance and operational resilience. Each model trades visibility for autonomy, efficiency for blast radius, or manageability for dependency.
 
+The goal is not to find the correct model. It is to choose where residual risk resides, ensure it is visible, and verify that failure modes are survivable by the teams who will live with them.
 
-### Resilience-Dominant Environments
+## Implications for Identity Design in OT
 
-In highly isolated OT environments or where safety requirements prohibit dependency on external identity services, local OT identity may play a dominant role, with federation used selectively where feasible.
+* Plan for degradation over operational lifecycles
+* Do not require federation for operator control or engineering changes to process state
+* Keep authority for high-consequence actions under OT governance
+* Understand infrastructure-level implications of directory trust
+* Treat time synchronization and IdP availability as operational dependencies, not assumptions
+* Design explicit fallback paths for identity system failure
+* Expect governance erosion and design containment accordingly
+* Prefer architectures that fail visibly rather than silently
 
-This represents an explicit architectural trade-off where availability and safety outweigh the benefits of centralized identity services.
+## Closing
 
-
-## Identity Lifecycle and Termination Risk
-
-Federated identity enables near-instant revocation of access in the Operational and Privileged Access Planes.
-
-The Resilience Plane introduces a controlled risk:
-- Local OT accounts may remain active after employment termination in IT
-
-This risk should be addressed through context-appropriate measures such as:
-- Regular review of local OT accounts
-- Named, non-shared break-glass identities
-- Sealed credential storage and access logging
-- Mandatory reconciliation after incident use
-
-This residual risk is an explicit design trade-off: limited, auditable identity persistence is accepted to preserve safety and operational continuity under degraded conditions.
-
-
-## Privileged Access and MFA Requirements
-
-Privileged actions in OT environments should enforce strong authentication 
-as the default control.
-
-Requirements:
-- Hardware-backed, phishing-resistant MFA
-- Local validation within the OT environment
-- No dependency on cloud-only MFA services for safety-critical access
-
-This prevents credential replay, phishing-based escalation, and trust abuse.
-
-Where technical or safety constraints prevent implementation of hardware-backed MFA, compensating controls and explicit risk acceptance are required.
-
-
-## Trust Anchor and Root of Trust
-
-This architecture distinguishes between:
-
-- **Trust Anchor for daily operations**  
-  The IT Identity Provider acts as the trust anchor for federated identity and authorization.
-
-- **Root of Trust for safety and availability**  
-  The local OT environment remains the ultimate root of trust through isolated identity, access, and control mechanisms.
-
-This distinction is critical for regulatory, safety, and resilience assessments.
-
-
-## Summary
-
-This reference architecture demonstrates how separating operational access, 
-privileged access, and resilience mechanisms enables OT environments to:
-
-- Reduce or eliminate infrastructure-level trust between IT and OT
-- Replace legacy authentication protocols with cryptographically verifiable 
-  tokens where technically feasible
-- Minimize lateral movement and credential exposure
-- Preserve operational continuity under degraded conditions  
-- Improve auditability and governance alignment
-
-Implementation will vary based on technical constraints, safety requirements, 
-and organizational maturity. The architectural principles provide a framework 
-for reasoning about identity and access trade-offs rather than a universal 
-implementation checklist.
+Identity in OT is not about elegance. It is about sustaining operational authority under stress for decades, and knowing where that authority will fail first.

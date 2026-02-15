@@ -1,81 +1,58 @@
-# OT Security Notes
+# OT Security: Structural Constraints & Operational Reality
 
-Architectural reasoning and lessons learned from implementing security in large-scale industrial operations.
+Working notes on long-lifecycle security in high-consequence industrial environments.
 
-This repository examines how security controls behave over long operational lifecycles in production OT environments, where availability, safety, and limited change capacity are hard design constraints rather than priorities.
+Based on architecture work across production sites where long lifecycles, limited change capacity, and operational accountability shape what can actually be sustained.
 
+The central question:
 
-## Principles and Scope
+**Which security controls survive operational reality, and which degrade predictably despite appearing sound on paper?**
 
-These notes follow several guiding principles for evaluating security in production OT environments:
-
-- **Architecture over compliance**
-Design trade-offs and system behaviors rather than control checklists.
-
-- **Operational reality**
-Failure modes and long-term degradation patterns observed in production environments.
-
-- **Structural constraints**
-Why common IT assumptions around patching, refresh cycles, and centralized management do not hold in OT.
-
-- **Architectural reasoning**
-Diagrams and written analysis intended to support durable decision-making and stakeholder communication.
-
-
-## Operational Reality
-
-Much OT security guidance is developed under assumptions that do not fully reflect production environments.
-
-In practice, implementation outcomes are shaped by structural constraints and gaps such as:
-
-- **Distributed implementation responsibility**
-Security intent is often defined centrally, while implementation depends on site teams with operational accountability and limited resources.
-
-- **Finite operational change capacity**
-Production systems have limited tolerance for disruption. Controls that undermine repairability or stability tend to erode over time.
-
-- **Long asset lifecycles**
-OT systems commonly operate for decades, creating lifecycle mismatches with IT security planning assumptions.
-
-- **Cross-domain governance boundaries**
-High-impact controls frequently span IT and OT organizational models, funding structures, and decision authority.
-
-- **Observability under operational constraints**
-Visibility is only sustainable when monitoring, alerting, and response can be maintained by local teams over time.
-
-These notes explore how such gaps influence real-world security outcomes.
-
+These notes examine patterns observed in practice: what holds, what erodes, and the structural reasons why.
 
 ## Notes
 
-- [Why OT Infrastructure Appears Static](./notes/ot-infrastructure-appears-static.md)
-- [Isolation Is Not Resilience](./notes/ot-isolation-vs-resilience.md)
-- [OT Identity Architecture: Federation, PAM, and Resilience](./notes/ot-identity-architecture.md)
+Each note addresses a distinct pattern. They can be read independently.
 
+### Operational Constraints
 
-## Related Repositories
+**[Why OT Infrastructure Appears Static](./notes/why-ot-appears-static.md)**
+Stability in continuous process industries is an engineered response to asymmetric risk, not technical stagnation. Explains the constraints that make OT infrastructure resistant to change and why ignoring them leads to unimplementable security strategies.
 
-- **[OT Trust in Isolated Networks](https://github.com/mattiaspilroth/ot-trust-in-isolated-networks)**  
-  PKI, certificate validation, and trust continuity under constrained or intermittent connectivity.
+**[Silent Degradation Under IT/OT Convergence](./notes/silent-degradation-under-convergence.md)**
+Redundant IT infrastructure inside segmented OT zones degrades invisibly when health signals cannot reach anyone who can act. The gap is not telemetry—it is ownership.
 
+### Identity and Trust
+
+**[OT Identity Architecture: Federation, PAM, and Residual Risk](./notes/ot-identity-architecture.md)**
+A framework for reasoning about identity patterns in OT. Explores trade-offs between isolation, federation, and hybrid models, and why authority for high-consequence actions must remain local.
+
+**[Trust in Isolated OT Networks](./notes/trust-in-isolated-networks.md)**
+Certificate validation assumes trust material is continuously obtainable. In segmented OT, architecture prevents this. Explains why trust degrades silently and why discovery is deferred until crisis.
+
+**[Trust Flow in Constrained OT Environments](./notes/trust-flow-in-constrained-environments.md)**
+Defines the properties that must hold for validation to occur predictably, repeatedly, and without improvisation inside constrained zones.
+
+## Perspective
+
+These notes favor:
+
+* Architectural reasoning over compliance checklists
+* Observed operational behavior over design intent
+* Long-term durability over short-term elegance
+
+The goal is useful analysis, not comprehensive coverage.
 
 ## Discussion
 
-These notes are intended to support architectural reasoning and informed debate rather than prescribe fixed solutions.
+If you have observed different patterns, identified gaps, or have experience that challenges these conclusions, your perspective is welcome.
 
-If you have observed similar or different failure modes, or have refined these patterns in your own practice, feel free to open an Issue or Discussion.
+Open an issue or start a discussion.
 
+## About
 
-## About and Disclaimer
+Written by **Mattias Pilroth**, working with OT security architecture across European chemical and process industry environments.
 
-This repository contains notes on architectural patterns and lessons learned from implementing OT security in high-consequence industrial production environments.
+Independent work documenting patterns observed in practice. Does not represent employer positions and avoids sensitive or identifying details.
 
-It reflects personal professional judgment informed by direct implementation experience and observations across multiple industrial environments. It does not represent the views, guidance, or policies of any current or former employer, and contains no site-specific, confidential, or proprietary information.
-
-**Not included:** site-identifying details, sensitive configurations, exploit instructions, or vendor-specific confidential information.
-
-
-## Contact
-
-- [LinkedIn](https://www.linkedin.com/in/mattiaspilroth)
-- [Email](mailto:mattias@pilroth.com)
+[LinkedIn](https://www.linkedin.com/in/mattiaspilroth)

@@ -1,12 +1,17 @@
 # Silent Degradation under IT/OT Convergence
 
-This document describes a recurring failure pattern in production OT environments undergoing IT/OT convergence.
+This document describes a recurring failure pattern in production OT
+environments undergoing IT/OT convergence.
 
-IT-style infrastructure introduced into segmented OT zones degrades silently when containment-first security models are applied without adapting observability. Redundant components continue operating after partial failure. Segmentation prevents health signals from escaping the zone. The system remains functional while consuming the safety margin redundancy provides.
+When IT-style infrastructure is introduced into segmented OT zones,
+redundant components continue operating after partial failure while
+segmentation prevents health signals from reaching anyone who can act.
+The system remains functional while consuming the safety margin
+redundancy was meant to provide. By the time failure becomes visible,
+redundancy has been exhausted.
 
-By the time failure becomes visible, redundancy has been exhausted.
-
-This is not a tooling failure. It is an architectural one. The gap is not telemetry. It is ownership.
+This is not a tooling failure. It is an architectural one. The gap is
+not telemetry. It is ownership.
 
 
 ## Where This Pattern Applies
@@ -18,6 +23,8 @@ This pattern most commonly affects OT environments that incorporate enterprise-s
 - Network appliances
 - Backup and failover systems
 
+These components behave differently from traditional control and safety
+systems, and the difference matters for how failure becomes visible.
 
 Traditional control and safety systems surface faults through process behavior. Alarms are part of normal operation.
 
@@ -69,6 +76,8 @@ FAT completed.
 SAT passed.  
 System handed over.
 
+Acceptance criteria verify function. They rarely verify that infrastructure health will remain observable after handover.
+
 Infrastructure health monitoring that is not required for acceptance is treated as optional. Optional capabilities imply ongoing ownership. Ongoing ownership implies operational cost.
 
 Once commissioned, responsibility shifts to operations teams whose priority is continuity. Monitoring paths that cross segmentation or organizational boundaries require maintenance, tuning, and coordination. Over time, they degrade or are disabled.
@@ -111,12 +120,11 @@ Degradation is time-dependent and invisible to point-in-time audits.
 
 ### Storage Controller Degradation
 
-In one OT virtualized environment designed for high availability:
+In one OT virtualized environment designed for high availability.
 
-- Compute hosts were redundant  
-- Storage provided hardware-level redundancy  
-- Services ran across multiple virtual machines  
-- The environment was tightly segmented  
+The environment was designed for high availability: redundant compute
+hosts, hardware-level storage redundancy, services distributed across
+virtual machines, and tight network segmentation.
 
 On paper, the design appeared resilient.
 
@@ -199,6 +207,8 @@ It is between:
 
 In some environments, the complexity introduced by observability outweighs the risk it mitigates. In others, silent degradation represents the dominant threat and must be addressed despite the implementation difficulty.
 
+Intermediate measures such as structured inspection routines, vendor maintenance agreements that include health verification, and physical walkdown procedures reduce exposure without requiring full instrumentation. They do not eliminate the pattern, but they narrow the window during which failure can accumulate undetected.
+
 There is no default-safe position.
 
 ## Design Implications
@@ -216,6 +226,8 @@ Loss of a single component does not suppress critical health signals. If the ale
 ### Local diagnosability is retained
 
 Site teams must be able to understand and act without continuous central support. Physical status indicators, local panels, and routine inspection during site rounds provide visibility that survives network or platform failures.
+
+Where infrastructure health depends on software interfaces, access to those interfaces must remain available independently of the systems they observe.
 
 ### Redundancy increases monitoring requirements
 
