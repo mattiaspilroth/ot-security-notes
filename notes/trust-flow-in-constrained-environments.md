@@ -16,7 +16,7 @@ It does not prescribe a specific implementation.
 
 A trust architecture inside a constrained zone must allow validation to occur **predictably, repeatedly, and without improvisation**.
 
-If this cannot be guaranteed, drift toward exception handling should be expected
+If this cannot be guaranteed, drift toward exception handling should be expected.
 
 ## Required Properties of Survivable Trust
 
@@ -53,17 +53,25 @@ Operation becomes fragile when it depends on optional connectivity or best-effor
 
 If availability is uncertain, bypass pressure increases and may become routine.
 
+This does not imply that always-online OCSP is required; it implies that whatever revocation approach is chosen (including deliberate non-use with compensating controls) must be explicit, supportable, and locally survivable.
+
+### Deterministic availability of time
+
+Validation depends on a consistent notion of time (e.g., certificate validity periods and freshness of revocation data).
+
+The zone must provide a time source that remains reliable under isolation, or define explicitly how validation behaves if time cannot be trusted.
+
+### Local completeness of validation paths
+
+Every system performing validation must be able to obtain the full set of inputs necessary to reach a decision from within the zone.
+
+Partial information produces timeouts, workarounds, or relaxed enforcement.
+
 ### Independence from external services
 
 Validation must succeed even if no connection to enterprise or internet resources exists.
 
 Any requirement for external resolution introduces dependency that may conflict with the architecture’s isolation goals.
-
-### Local completeness of validation paths
-
-Every system performing validation must have access to the full set of inputs necessary to reach a decision.
-
-Partial information produces timeouts, workarounds, or relaxed enforcement.
 
 ### Predictable behavior during degraded conditions
 
@@ -78,6 +86,14 @@ If behavior is undefined, local interpretation tends to replace policy.
 It must be possible to verify that validation is not only configured but actively occurring during operation.
 
 Presence of structure is not evidence of execution.
+
+---
+
+These properties are not independent. In practice, they create tensions that must be resolved through design choices.
+
+Deterministic availability favors pre-staging all trust material. Lifecycle management requires periodic updates. Independence from external services limits distribution mechanisms. Predictable degraded behavior may sacrifice availability for security, or vice versa.
+
+The goal is not to maximize each property independently. It is to achieve sufficient capability in each while understanding which tensions the architecture resolves in favor of availability, which in favor of assurance, and why.
 
 ## What Happens If These Properties Are Absent
 
