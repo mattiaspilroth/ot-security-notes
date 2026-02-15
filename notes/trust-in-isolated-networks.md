@@ -1,0 +1,135 @@
+# Trust in Isolated OT Networks
+
+A backup agent update fails during a scheduled maintenance window.
+
+The installer stops with a generic error. The binary is signed by a root authority that does not exist in the local store. Automatic root updates were disabled during commissioning to remove external dependencies.
+
+The missing certificate is exported from a connected workstation and imported manually.
+
+The installation succeeds.
+
+Months later, a modem driver fails validation. Another import. Another exception.
+
+Endpoint protection deployment stalls across an entire zone because required authorities were never staged.
+
+Each incident is resolved.
+The pattern is not.
+
+The pattern rarely presents as a unified problem. Each incident appears distinct enough that the underlying condition remains hidden.
+
+## The Pattern
+
+Certificate validation assumes trust material is continuously obtainable.
+
+In enterprise environments, trust material arrives when needed. In segmented OT, architecture prevents it.
+
+Connectivity is restricted. External services are absent. Automatic updates are disabled to preserve predictability. The architecture that protects the process simultaneously withholds what modern trust mechanisms expect.
+
+PKI becomes a runtime dependency on resources the environment is built to deny.
+
+## Why Failure Looks Technical
+
+When validation cannot obtain what it needs, the error rarely presents as a trust decision.
+
+Installers fail.
+Services refuse to start.
+Updates hang.
+
+The visible problem is timeout, reachability, or missing files. Investigation follows the symptom. Networking is adjusted. Access is opened. Function returns.
+
+Because the failure does not identify itself as trust, trust is never examined.
+
+## How Restoration Produces Drift
+
+Under pressure, administrators import roots, relax revocation, or create temporary paths to external sources.
+
+Production resumes.
+
+The action is rarely recorded as a security decision. It becomes part of the environment.
+
+The same pattern appears across sites:
+
+Revocation bypassed.
+Distribution points ignored.
+Trust stores frozen.
+Manual imports forgotten.
+
+Each step is locally rational.
+Together they transform cryptographic assurance into ceremony.
+
+## Enforcement Is Not Continuous
+
+### During production
+
+Validation is frequently permissive.
+
+Failures are ignored or invisible. Dependencies accumulate quietly. The system appears healthy.
+
+This state can last for years.
+
+### During maintenance or recovery
+
+Validation tightens.
+
+Installers and configuration routines require complete answers. Activities stop at the moment tolerance for delay is lowest.
+
+The interruption feels exceptional.
+In reality, it is deferred truth.
+
+## Why Discovery Comes Late
+
+Validation failures during production are logged but never surface operationally.
+
+Only activities that demand strict enforcement make the dependency visible:
+
+* software installation
+* system rebuilds
+* vendor signing changes
+* stricter policy enforcement
+
+By then, years of implicit dependency have accumulated behind an apparently stable surface.
+
+## Governance Without Execution
+
+From outside, everything appears intact.
+
+Certificates exist.
+Policies reference validation.
+Architectures show controlled trust chains.
+
+What is missing is proof that these mechanisms execute reliably at runtime.
+
+Audits confirm structure.
+They cannot confirm behavior.
+
+## The Invisible Failure Mode
+
+Trust degradation is rarely urgent.
+
+No alarm sounds.
+Operators are not interrupted.
+Production continues.
+
+Because the environment rewards continuity, unresolved dependency is allowed to persist until a moment arrives when strict validation cannot be avoided.
+
+That moment is usually crisis.
+
+## Framing the Constraint
+
+The issue is not that OT is isolated.
+
+The issue is that trust technologies are introduced whose survival depends on services isolation makes unreliable.
+
+When this mismatch exists, exception handling will gradually replace design.
+
+## Architectural Implication
+
+Any trust architecture placed inside a constrained zone must assume that external reachability will fail, intermittently or permanently.
+
+If continued operation depends on conditions the environment cannot guarantee, drift toward informal practice is unavoidable.
+
+The result is predictable:
+
+Assurance exists on paper.
+Execution becomes optional.
+Discovery is deferred.
