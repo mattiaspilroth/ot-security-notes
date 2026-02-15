@@ -145,7 +145,7 @@ The Purdue Enterprise Reference Architecture documented how industrial systems w
 
 When OT security emerged as a discipline, Purdue was adopted as a segmentation template. Over time, description hardened into prescription. The map was mistaken for a wall.
 
-Modern environments have outgrown the model. Engineering workflows cross zones. Vendors require remote access. Cloud services, identity systems, and shared infrastructure create lateral paths the hierarchy does not represent. Compliance with the model no longer guarantees coverage against actual threats.
+Modern environments have outgrown the model. Engineering workflows cross zones. Vendors require remote access. Cloud services, identity systems, and shared infrastructure create lateral paths the hierarchy does not represent. Compliance with the model does not necessarily provide coverage against modern threat paths.
 
 ### 7.2 Pattern Compliance vs Risk Reduction
 

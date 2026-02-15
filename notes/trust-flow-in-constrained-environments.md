@@ -7,7 +7,7 @@ In isolated and segmented operational environments, certificate validation canno
 When trust mechanisms depend on services the architecture cannot guarantee, execution will become inconsistent.
 Under pressure, informal adjustments replace design.
 
-For trust to remain reliable, the movement and availability of trust material must be engineered deliberately.
+For trust to remain reliable, the movement, availability, and lifecycle of trust material must be engineered deliberately.
 
 This document defines the properties required for that to occur.
 It does not prescribe a specific implementation.
@@ -91,7 +91,7 @@ Presence of structure is not evidence of execution.
 
 These properties are not independent. In practice, they create tensions that must be resolved through design choices.
 
-Deterministic availability favors pre-staging all trust material. Lifecycle management requires periodic updates. Independence from external services limits distribution mechanisms. Predictable degraded behavior may sacrifice availability for security, or vice versa.
+Deterministic availability often favors pre-staging all trust material. Lifecycle management requires periodic updates. Independence from external services limits distribution mechanisms. Predictable degraded behavior may sacrifice availability for security, or vice versa.
 
 The goal is not to maximize each property independently. It is to achieve sufficient capability in each while understanding which tensions the architecture resolves in favor of availability, which in favor of assurance, and why.
 
@@ -100,7 +100,7 @@ The goal is not to maximize each property independently. It is to achieve suffic
 When environments lack these characteristics, familiar patterns emerge.
 
 Roots are imported manually.
-Revocation is disabled.
+Revocation checking is disabled or bypassed.
 Distribution points are ignored.
 Default trust programs are inherited without examination.
 Self-signed certificates proliferate as substitutes for managed trust.

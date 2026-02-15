@@ -4,7 +4,7 @@ A backup agent update fails during a scheduled maintenance window.
 
 The installer stops with a generic error. The binary is signed by a root authority that does not exist in the local store. Automatic root updates were disabled during commissioning to remove external dependencies.
 
-The missing certificate is exported from a connected workstation and imported manually.
+The missing root certificate is exported from a connected workstation and imported manually.
 
 The installation succeeds.
 
@@ -19,7 +19,7 @@ The pattern rarely presents as a unified problem. Each incident appears distinct
 
 ## The Pattern
 
-Certificate validation assumes trust material is continuously obtainable.
+Certificate validation assumes that required trust material is obtainable at the moment a decision must be made.
 
 In enterprise environments, trust material arrives when needed. In segmented OT, architecture prevents it.
 
@@ -47,7 +47,7 @@ Under pressure, administrators import roots, relax revocation, or create tempora
 
 Production resumes.
 
-The action is rarely recorded as a security decision. It becomes part of the environment.
+The action is rarely recorded as a security decision. It becomes embedded as configuration.
 
 The same pattern appears across sites:
 
@@ -103,7 +103,7 @@ Architectures show controlled trust chains.
 What is missing is proof that these mechanisms execute reliably at runtime.
 
 Audits confirm structure.
-They cannot confirm behavior.
+They rarely confirm behavior.
 
 Behavior can only be demonstrated through evidence that validation decisions occur during normal operation and produce enforceable outcomes, not merely exist as configuration.
 
@@ -131,7 +131,7 @@ When this mismatch exists, exception handling gradually replaces design.
 
 Any trust architecture placed inside a constrained zone must assume that external reachability will fail, intermittently or permanently.
 
-If continued operation depends on conditions the environment cannot guarantee, drift toward informal practice is unavoidable.
+If continued operation depends on conditions the environment cannot guarantee, informal practice will replace design.
 
 The result is predictable:
 
