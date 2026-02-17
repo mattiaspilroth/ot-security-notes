@@ -36,10 +36,10 @@ Operating systems, firmware, drivers, control applications, and hardware togethe
 
 Modifying the underlying stack without vendor validation can:
 
-* Void warranty and support agreements
-* Transfer liability for outcomes to the operator
-* Undermine safety cases or certification claims
-* Introduce changes outside vendor-qualified migration paths
+- Void warranty and support agreements
+- Transfer liability for outcomes to the operator
+- Undermine safety cases or certification claims
+- Introduce changes outside vendor-qualified migration paths
 
 Patch and upgrade timing is therefore constrained by vendor validation cycles rather than operator preference.
 
@@ -128,7 +128,7 @@ Major OT systems are usually delivered through capital projects. After commissio
 
 These teams are rarely funded or staffed to function like product engineering organizations driving continuous evolution.
 
-Performance indicators emphasize availability, yield, and process stability. A system that runs safely and within specification is considered successful regardless of patch state. Security improvement work is typically introduced as an external requirement rather than embedded in operational metrics. When production targets are met, there is no internal signal that anything is wrong.
+Performance indicators emphasize availability, yield, and process stability. A system that runs safely and within specification is considered successful regardless of patch state. Security improvement work arrives as an external requirement. When production targets are met, no internal signal indicates anything is wrong.
 
 ### 5.2 Competence and Recovery
 
@@ -198,7 +198,7 @@ The appliance model limits independent change. Capital delivery separates build 
 
 Slow change is not dysfunction. It is the rational equilibrium produced by these incentives.
 
-When this equilibrium is overlooked, security strategies can become elegant on paper yet difficult to sustain in practice.
+Misreading this equilibrium leads to security strategies that are elegant on paper and unimplementable in practice.
 
 ## 10. Implications for Security Design
 
@@ -223,6 +223,10 @@ Perimeter measures are necessary but insufficient. Introduce detection, identity
 ### Align with operational time
 
 Enduring change follows maintenance and investment rhythms.
+
+### Account for the authority gap
+
+Assume operators may lack the authority to modify validated systems independently. Design controls that function within vendor validation constraints rather than depending on their removal.
 
 ## Moving Forward
 
