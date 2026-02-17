@@ -45,7 +45,17 @@ Patch and upgrade timing is therefore constrained by vendor validation cycles ra
 
 This model allowed asset owners to transfer integration and validation risk to the original system supplier. Under isolation assumptions, it worked well. In a connected environment, it becomes a structural constraint on security evolution.
 
-### 2.1 Authority Versus Accountability
+### 2.1 Transparency and Information Asymmetry
+
+The validation model also creates a visibility constraint.
+
+Unlike enterprise IT platforms, where Software Bills of Materials (SBOMs) increasingly allow independent risk assessment, many OT systems function as opaque assemblies. Operators often lack detailed insight into embedded libraries, third-party components, and runtime dependencies.
+
+Even when a vulnerability is publicly disclosed, asset owners may be unable to determine whether their specific validated configuration is affected without vendor confirmation.
+
+The constraint is therefore not only contractual. It is informational.
+
+### 2.2 Authority Versus Accountability
 
 A structural tension follows.
 
@@ -118,11 +128,17 @@ Major OT systems are usually delivered through capital projects. After commissio
 
 These teams are rarely funded or staffed to function like product engineering organizations driving continuous evolution.
 
-Performance indicators emphasize availability and stability. A system that runs safely is considered successful, even if it is aging.
+Performance indicators emphasize availability, yield, and process stability. A system that runs safely and within specification is considered successful regardless of patch state. Security improvement work is typically introduced as an external requirement rather than embedded in operational metrics. When production targets are met, there is no internal signal that anything is wrong.
 
 ### 5.2 Competence and Recovery
 
 Local familiarity with known behavior strongly influences restoration speed. Introducing new technology without equal investment in competence can extend outages.
+
+This is not merely about comfort. It directly affects Mean Time to Repair (MTTR).
+
+In high-pressure situations, familiarity with known failure modes, log patterns, and recovery sequences determines restoration speed. Modernizing infrastructure without transferring that deep operational familiarity introduces diagnostic uncertainty.
+
+A technically superior system that extends outage duration under stress is, operationally, a regression.
 
 From this perspective, familiarity contributes directly to resilience.
 
@@ -182,7 +198,7 @@ The appliance model limits independent change. Capital delivery separates build 
 
 Slow change is not dysfunction. It is the rational equilibrium produced by these incentives.
 
-Misreading this equilibrium leads to security strategies that are elegant on paper and unimplementable in practice.
+When this equilibrium is overlooked, security strategies can become elegant on paper yet difficult to sustain in practice.
 
 ## 10. Implications for Security Design
 
