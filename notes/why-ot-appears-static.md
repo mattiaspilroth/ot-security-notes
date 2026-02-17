@@ -67,7 +67,7 @@ Responsibility and technical authority are separated.
 
 Even when operators are aware of a vulnerability, they may lack both the information and the contractual latitude to remediate independently.
 
-Over time, this leaves asset owners dependent on the incumbent vendor not only for support, but for the practical ability to migrate away.
+Over time, this dynamic increases dependence on the incumbent vendor not only for support, but for the practical ability to migrate to alternatives.
 
 Inaction is not always neglect. In many cases, it is constraint.
 
@@ -136,13 +136,13 @@ Local familiarity with known behavior strongly influences restoration speed. Int
 
 This is not merely about comfort. It directly affects Mean Time to Repair (MTTR).
 
+At the same time, the generation that commissioned these systems is retiring, taking institutional knowledge with them and increasing dependence on vendor support.
+
 In high-pressure situations, familiarity with known failure modes, log patterns, and recovery sequences determines restoration speed. Modernizing infrastructure without transferring that deep operational familiarity introduces diagnostic uncertainty.
 
 A technically superior system that extends outage duration under stress is, operationally, a regression.
 
 From this perspective, familiarity contributes directly to resilience.
-
-At the same time, many of the individuals who commissioned and deeply understood these systems are retiring. Institutional knowledge transfers incompletely. The capability required to change environments safely is often declining while the demand for change is increasing.
 
 ## 6. Security by Containment
 
@@ -166,11 +166,32 @@ The constraints described above have not only shaped operations. They have also 
 
 ### 7.1 When Descriptions Become Prescriptions
 
-The Purdue Enterprise Reference Architecture documented how industrial systems were structured: field devices, control layers, site operations, enterprise. It described existing reality. It did not prescribe security boundaries.
+The Purdue Enterprise Reference Architecture documented how industrial 
+systems were structured: field devices, control layers, site operations, 
+enterprise. It described existing reality. It did not prescribe security 
+boundaries.
 
-When OT security emerged as a discipline, Purdue was adopted as a segmentation template. Over time, description hardened into prescription. The map was mistaken for a wall.
+When OT security emerged as a discipline, Purdue was adopted as a 
+segmentation template. Over time, description hardened into prescription. 
+The map was mistaken for a wall.
 
-Modern environments have outgrown the model. Engineering workflows cross zones. Vendors require remote access. Cloud services, identity systems, and shared infrastructure create lateral paths the hierarchy does not represent. Compliance with the model does not necessarily provide coverage against modern threat paths.
+This hardening was not accidental. Purdue aligned with the capital 
+project delivery model. Projects need defined scope boundaries, clear 
+handoff points, auditable separation, and standardized specifications. 
+Purdue zones provided all of these. A model that described evolved 
+structure became a template for new construction because it made 
+large-scale delivery manageable.
+
+The problem is not Purdue. The problem is that modern environments no 
+longer fit the delivery model that Purdue supported. Engineering 
+workflows cross zones. Vendors require remote access. Cloud services, 
+identity systems, and shared infrastructure create lateral paths the 
+hierarchy does not represent. Compliance with the model does not 
+necessarily provide coverage against modern threat paths.
+
+The solution is not to discard Purdue. It is to recognize when 
+description has become prescription and reconnect security measures 
+to actual threat paths rather than template conformity.
 
 ### 7.2 Pattern Compliance vs Risk Reduction
 
