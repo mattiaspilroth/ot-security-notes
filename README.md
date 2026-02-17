@@ -1,18 +1,20 @@
 # OT Security: Structural Constraints & Operational Reality
 
-Working notes on long-lifecycle security in high-consequence industrial environments.
+Notes and analysis on long-lifecycle security in high-consequence industrial environments.
 
-Based on architecture work across production sites where long lifecycles, limited change capacity, and operational accountability shape what can actually be sustained.
+Drawn from architecture work across production sites where long lifecycles, limited change capacity, and operational accountability shape what can actually be sustained.
 
 The central question:
 
 **Which security controls survive operational reality, and which degrade predictably despite appearing sound on paper?**
 
-These notes examine patterns observed in practice: what holds, what erodes, and the structural reasons why.
+These notes examine patterns observed in practice — what holds, what erodes, and the structural reasons why.
 
 ## Notes
 
-Each note addresses a distinct pattern. They can be read independently.
+Each note addresses a distinct pattern and can be read independently.
+
+Readers unfamiliar with the structural constraints of industrial environments may find *Why OT Infrastructure Appears Static* useful context for the others.
 
 ### Operational Constraints
 
@@ -33,26 +35,29 @@ Certificate validation assumes trust material is continuously obtainable. In seg
 **[Trust Flow in Constrained OT Environments](./notes/trust-flow-in-constrained-environments.md)**
 Defines the properties that must hold for validation to occur predictably, repeatedly, and without improvisation inside constrained zones.
 
+The trust notes form a pair. *Trust in Isolated OT Networks* diagnoses the failure pattern. *Trust Flow in Constrained OT Environments* defines the architectural properties required to avoid it.
+
 ## Perspective
 
 These notes favor:
 
-* Architectural reasoning over compliance checklists
-* Observed operational behavior over design intent
-* Long-term durability over short-term elegance
+- Architectural reasoning over compliance checklists
+- Observed operational behavior over design intent
+- Long-term durability over short-term elegance
 
 The goal is useful analysis, not comprehensive coverage.
 
 ## Discussion
 
-If you have observed different patterns, identified gaps, or have experience that challenges these conclusions, your perspective is welcome.
+If you have observed different patterns, identified gaps, or have experience
+that challenges these conclusions — open an issue or start a discussion.
 
-Open an issue or start a discussion.
+Disagreement grounded in operational experience is particularly valuable.
 
 ## About
 
-Written by **Mattias Pilroth**, working with OT security architecture across European chemical and process industry environments.
+Written by **Mattias Pilroth**, working with enterprise OT security architecture across European chemical and process industry environments.
 
-Independent work documenting patterns observed in practice. Does not represent employer positions and avoids sensitive or identifying details.
+Independent work documenting patterns observed in practice and thinking through their implications. Does not represent employer positions and avoids sensitive or identifying details.
 
 [LinkedIn](https://www.linkedin.com/in/mattiaspilroth)
