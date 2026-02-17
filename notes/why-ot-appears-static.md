@@ -6,15 +6,13 @@ From outside the operating context, this can appear irrational. From inside, it 
 
 Validated configurations define liability boundaries.
 Asset lifecycles are measured in decades.
-Failure consequences in continuous processes are non-linear and often disproportionate to the initiating event.
+Failure consequences in continuous processes are often non-linear and disproportionate to the initiating event.
 
 Many installations were commissioned under assumptions of isolation. Isolation is no longer viable. The structures remain.
 
 Understanding apparent inertia requires understanding the constraints that produced it and that continue to shape which forms of change are viable.
 
 **Scope:** This document focuses on continuous process industries and other high-consequence environments where disturbances can cascade into physical outcomes. Discrete manufacturing and lower-consequence operations may face different trade-offs.
-
-
 
 ## 1. Different Optimization Problems
 
@@ -28,25 +26,40 @@ Control systems widely deployed in the 1990s and early 2000s were engineered as 
 
 Isolation therefore became a working assumption. Contracts, support models, and responsibilities formed around it. Many still persist.
 
-
-
 ## 2. Validated Functions, Not Configurable Platforms
 
 In IT, organizations buy platforms intended to be modified.
 
 In OT process control, organizations buy validated functions.
 
-Operating systems, firmware, drivers, applications, and hardware together form a certified configuration. That boundary is also legal and financial.
+Operating systems, firmware, drivers, control applications, and hardware together form a certified configuration. That configuration defines functional safety assumptions, warranty terms, liability boundaries, and regulatory claims. The operator does not fully own the platform in the IT sense. They operate a certified appliance.
 
-* Unauthorized modification can void warranty and support
-* Responsibility for outcomes can shift to the operator
-* Patch and upgrade timing is usually governed by vendor validation cycles
+Modifying the underlying stack without vendor validation can:
 
-This model allowed asset owners to transfer integration risk to specialists. Under isolation assumptions, it worked well.
+* Void warranty and support agreements
+* Transfer liability for outcomes to the operator
+* Undermine safety cases or certification claims
+* Introduce changes outside vendor-qualified migration paths
 
-In a connected environment, it becomes a constraint. Operators may have limited authority to change what they nevertheless remain accountable for operating.
+Patch and upgrade timing is therefore constrained by vendor validation cycles rather than operator preference.
+
+This model allowed asset owners to transfer integration and validation risk to the original system supplier. Under isolation assumptions, it worked well. In a connected environment, it becomes a structural constraint on security evolution.
+
+### 2.1 Authority Versus Accountability
+
+A structural tension follows.
+
+Operators carry availability risk, safety consequences, and production loss.
+
+Vendors retain knowledge of internal system composition, validation authority for patches and upgrades, and control over supported migration paths.
+
+Responsibility and technical authority are separated.
+
+Even when operators are aware of a vulnerability, they may lack both the information and the contractual latitude to remediate independently.
 
 Over time, this leaves asset owners dependent on the incumbent vendor not only for support, but for the practical ability to migrate away.
+
+Inaction is not always neglect. In many cases, it is constraint.
 
 ## 3. Control Systems as Operational Equipment
 
@@ -84,10 +97,7 @@ Change increases uncertainty.
 
 Rollback can be complex. Diagnostics can be incomplete. Multiple parties may be active simultaneously. In high-consequence environments, this window carries significant weight.
 
-When implementation risk is immediate, concrete, and borne by the team
-making the change, while the security benefit is preventive and
-conditional on a threat scenario that may never materialise locally,
-postponement is the predictable outcome.
+When implementation risk is immediate, concrete, and borne by the team making the change, while the security benefit is preventive and conditional on a threat scenario that may never materialize locally, postponement is the predictable outcome.
 
 The conditions required for safe execution may be rare and tied to shutdowns, specialist availability, or extensive preparation. In many organizations, the backlog grows faster than the capacity to retire it.
 
@@ -99,8 +109,6 @@ Industrial infrastructure is expected to serve for decades.
 End of support and end of use diverge. Replacement depends on capital cycles, outage timing, and vendor qualification paths. Independent upgrades may invalidate support.
 
 Long persistence follows from these mechanics.
-
-
 
 ## 5. Capital Projects and Operational Ownership
 
@@ -129,11 +137,12 @@ Segmentation, zoning, DMZ patterns, and strict access pathways aim to limit blas
 This remains necessary.
 
 It is also incomplete. Containment does not prevent misuse of legitimate access, supplier pathways, or failures that originate inside the boundary.
+
 Business requirements are systematically eroding isolation. Real-time production data, remote monitoring, predictive analytics, and cloud connectivity are no longer optional. Digital transformation demands integration.
 
 How integration pressure alters feasible security models is a topic in its own right and is treated separately.
 
-Additional mechanisms are required, but they must fit what operations can realistically sustain and what the business requires to remain competitive.
+Additional mechanisms are required, but they must fit what operations can sustain and what the business requires to remain competitive.
 
 ## 7. From Patterns to Outcomes
 
@@ -159,13 +168,9 @@ Security work must reconnect measures to credible threat paths, system behavior,
 
 In OT, severity and recoverability dominate decision-making.
 
-Controls that complicate restoration encounter resistance regardless of
-their security merit. This is not irrational. During a process upset,
-the speed and confidence with which operators can restore safe
-operation determines whether an incident remains contained or escalates.
+Controls that complicate restoration encounter resistance regardless of their security merit. This is not irrational. During a process upset, the speed and confidence with which operators can restore safe operation determines whether an incident remains contained or escalates.
 
-Measures that improve resistance while keeping systems understandable
-are more likely to survive operational reality.
+Measures that improve resistance while keeping systems understandable are more likely to survive operational reality.
 
 The objective is sustainable reduction of exposure.
 
