@@ -17,7 +17,7 @@ The pattern is not.
 
 The pattern rarely presents as a unified problem. Each incident appears distinct enough that the underlying condition remains hidden.
 
-## The Pattern
+## The pattern
 
 Certificate validation assumes that required trust material is obtainable at the moment a decision must be made.
 
@@ -29,7 +29,7 @@ PKI becomes a runtime dependency on resources the environment is built to deny.
 
 While the examples here focus on certificate trust, the same structural dependency appears in licensing systems, name resolution, and time-based validation.
 
-## Why Failure Looks Technical
+## Why failure looks technical
 
 When validation cannot obtain what it needs, the error rarely presents as a trust decision.
 
@@ -41,7 +41,7 @@ The visible problem is timeout, reachability, or missing files. Investigation fo
 
 Because the failure does not identify itself as trust, trust is never examined.
 
-## How Restoration Produces Drift
+## How restoration produces drift
 
 Under pressure, administrators import roots, relax revocation, or create temporary paths to external sources.
 
@@ -58,7 +58,7 @@ Manual imports forgotten.
 
 Each step is locally rational. None trigger immediate consequences. Together they transform cryptographic assurance into ceremony.
 
-## Enforcement Is Not Continuous
+## Enforcement is not continuous
 
 ### During production
 
@@ -79,7 +79,7 @@ Installers and configuration routines require complete answers. Activities stop 
 The interruption feels exceptional.
 In reality, it is deferred truth.
 
-## Why Discovery Comes Late
+## Why discovery comes late
 
 Validation failures during production are logged but never surface operationally.
 
@@ -92,7 +92,7 @@ Only activities that demand strict enforcement make the dependency visible:
 
 By then, years of implicit dependency have accumulated behind an apparently stable surface.
 
-## Governance Without Execution
+## Governance without execution
 
 From outside, everything appears intact.
 
@@ -107,7 +107,7 @@ They rarely confirm behavior.
 
 Behavior can only be demonstrated through evidence that validation decisions occur during normal operation and produce enforceable outcomes, not merely exist as configuration.
 
-## The Invisible Failure Mode
+## The invisible failure mode
 
 Trust degradation is rarely urgent.
 
@@ -119,7 +119,7 @@ Because the environment rewards continuity, unresolved dependency is allowed to 
 
 That moment is usually crisis.
 
-## Framing the Constraint
+## Framing the constraint
 
 The issue is not that OT is isolated.
 
@@ -127,7 +127,7 @@ The issue is that trust technologies are introduced whose survival depends on se
 
 When this mismatch exists, exception handling gradually replaces design.
 
-## Architectural Implication
+## Architectural implication
 
 Any trust architecture placed inside a constrained zone must assume that external reachability will fail, intermittently or permanently.
 

@@ -1,6 +1,6 @@
 # Trust Flow in Constrained OT Environments
 
-## Why Trust Requires Design
+## Why trust requires design
 
 In isolated and segmented operational environments, certificate validation cannot rely on spontaneous reachability.
 
@@ -12,13 +12,13 @@ For trust to remain reliable, the movement, availability, and lifecycle of trust
 This document defines the properties required for that to occur.
 It does not prescribe a specific implementation.
 
-## What Must Remain True
+## What must remain true
 
 A trust architecture inside a constrained zone must allow validation to occur **predictably, repeatedly, and without improvisation**.
 
 If this cannot be guaranteed, drift toward exception handling should be expected.
 
-## Required Properties of Survivable Trust
+## Required properties of survivable trust
 
 ### Explicit ownership of trust state
 
@@ -95,7 +95,7 @@ Deterministic availability often favors pre-staging all trust material. Lifecycl
 
 The goal is not to maximize each property independently. It is to achieve sufficient capability in each while understanding which tensions the architecture resolves in favor of availability, which in favor of assurance, and why.
 
-## What Happens If These Properties Are Absent
+## What happens if these properties are absent
 
 When environments lack these characteristics, familiar patterns emerge.
 
@@ -108,7 +108,7 @@ Exceptions accumulate without record.
 
 Systems continue to function, but assurance becomes difficult to demonstrate at runtime. In practice, tolerance has replaced assurance.
 
-## What These Properties Enable
+## What these properties enable
 
 When these properties are engineered deliberately, trust becomes operational rather than aspirational.
 
@@ -121,7 +121,7 @@ Continuity and assurance stop competing with one another.
 
 Trust becomes a dependency that can be operated, not tolerated.
 
-## Implementation Latitude
+## Implementation latitude
 
 This document does not mandate technology, topology, or product.
 

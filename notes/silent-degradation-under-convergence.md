@@ -1,7 +1,6 @@
 # Silent Degradation under IT/OT Convergence
 
-This document describes a recurring failure pattern in production OT
-environments undergoing IT/OT convergence.
+This paper describes a recurring failure pattern in production OT environments undergoing IT/OT convergence.
 
 When IT-style infrastructure is introduced into segmented OT zones,
 redundant components continue operating after partial failure while
@@ -14,7 +13,7 @@ This is not a tooling failure. It is an architectural one. The gap is
 not telemetry. It is ownership.
 
 
-## Where This Pattern Applies
+## Where this pattern applies
 
 This pattern most commonly affects OT environments that incorporate enterprise-style infrastructure inside segmented zones:
 
@@ -34,7 +33,7 @@ The issue is rarely the absence of signals.
 It is the absence of a viable path for those signals to reach someone who can act.
 
 
-## The Failure Mechanism
+## The failure mechanism
 
 This failure pattern emerges from the interaction of three forces that are individually reasonable.
 
@@ -66,7 +65,7 @@ Isolation does not create degradation.
 Isolation often prevents degradation signals from reaching those who could act.
 
 
-## Why the Pattern Repeats
+## Why the pattern repeats
 
 The conditions that produce this outcome are structural.
 
@@ -84,7 +83,7 @@ Once commissioned, responsibility typically shifts to operations teams whose pri
 
 By the time degradation becomes visible, redundancy is often already reduced or exhausted.
 
-## Recognizing the Pattern
+## Recognizing the pattern
 
 This failure mode shows consistent characteristics across environments.
 
@@ -115,15 +114,11 @@ As-built documentation and asset inventories confirm structure, not condition.
 Degradation is time-dependent and invisible to point-in-time audits.
 
 
-## Representative Failures
+## Representative failures
 
-### Storage Controller Degradation
+### Storage controller degradation
 
-In one OT virtualized environment designed for high availability.
-
-The environment was designed for high availability: redundant compute
-hosts, hardware-level storage redundancy, services distributed across
-virtual machines, and tight network segmentation.
+In one OT virtualized environment engineered for high availability, the architecture included redundant compute hosts, hardware-level storage redundancy, services distributed across virtual machines, and tight network segmentation.
 
 On paper, the design appeared resilient.
 
@@ -145,7 +140,7 @@ The system could signal its own degradation.
 The architecture prevented anyone from hearing it.
 
 
-### Accumulated Disk Failures
+### Accumulated disk failures
 
 A simpler variant appears routinely with RAID arrays in segmented OT environments.
 
@@ -165,7 +160,7 @@ Discovery occurs only when a third disk fails or when a technician notices multi
 The system recorded every failure.  
 No one was listening.
 
-## The Implementation Gap: Ownership, Not Telemetry
+## The implementation gap: ownership, not telemetry
 
 Most OT environments lack a durable capability to consume infrastructure health signals.
 
@@ -174,14 +169,17 @@ Process control systems generate alarms as part of normal operation. IT-style in
 The gap is not telemetry.  
 It is ownership.
 
-### Making health signals operational requires
+### Why making health signals operational is difficult
 
-- Approved and maintained telemetry paths across segmentation boundaries  
-- Systems that receive, interpret, and prioritize infrastructure health events  
-- Integration into operational workflows with clear escalation and response  
+Making infrastructure health actionable requires more than collecting data. It requires:
 
-Each introduces cost, coordination overhead, and ongoing operational burden.
+* Approved and maintained telemetry paths across segmentation boundaries.
 
+* Systems capable of receiving, authenticating, and prioritizing infrastructure events.
+
+* Integration into operational workflows with defined escalation and response.
+
+Each of these introduces cost, coordination overhead, and ongoing operational burden.  
 None are one-time efforts.
 
 ### Why platforms fail to close the gap
@@ -197,7 +195,7 @@ Behavior does not change.
 
 In each case, the platforms assume sustained ownership and specialist capacity that many sites are neither funded nor organized to provide.
 
-## Trade-offs and Architectural Reality
+## Trade-offs and architectural reality
 
 The choice is not between comprehensive observability and isolation.
 
@@ -212,9 +210,11 @@ Intermediate measures such as structured inspection routines, vendor maintenance
 
 They are effective only when systematic. Walkdowns require defined inspection points, documented thresholds, and clear responsibility for escalation. Maintenance agreements must detect latent faults and verify remaining capacity in redundant systems.
 
+These administrative controls depend on sustained funding, staffing continuity, and organizational attention. Over multi-decade lifecycles, those conditions cannot be assumed.
+
 There is no default-safe position.
 
-## Design Implications
+## Design implications
 
 OT architectures that remain diagnosable over long lifecycles design observability deliberately and minimally.
 
@@ -249,6 +249,8 @@ Failure is not sudden. Detection is.
 
 If degradation cannot escape the zone in which it occurs, redundancy becomes a countdown rather than a safeguard.
 
-Resilient OT architectures treat infrastructure health signaling as a first-class architectural concern, not an operational enhancement.
+Resilient OT architectures treat infrastructure health signaling as a first-class architectural concern, not an operational enhancement. Health signaling must be deliberately scoped, durably owned, and survivable across organizational change.
 
-Systems that are deliberately isolated must still be allowed to signal when they begin to fail.
+Isolation protects systems from intrusion. It must not prevent them from signaling their own decay.
+
+When infrastructure can fail silently, resilience is only apparent.

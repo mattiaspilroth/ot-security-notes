@@ -2,11 +2,11 @@
 
 Identity architectures in OT operate under the same constraints that shape all long-lifecycle operational infrastructure: limited change capacity, intermittent connectivity, and operational accountability that prioritizes continuity over policy compliance.
 
-While modern identity models emphasize federation and centralized authentication, OT environments impose structural limits on adoption. Identity controls must remain viable over decades, operate under partial isolation, and degrade safely when external systems fail.
+Modern identity models emphasize federation and centralized authentication. OT environments impose structural limits on how far those models can extend. Identity controls must remain viable over decades, operate under partial isolation, and degrade safely when external systems fail.
 
-This note examines three common identity patterns, the risks they redistribute, and why no single model resolves the underlying tensions. It compares isolated, trusted, and federated approaches, then addresses federation scope, third-party access, and residual risk.
+This paper examines three common identity patterns, the risks they redistribute, and why no single model resolves the underlying tensions. It compares isolated, trusted, and federated approaches, then addresses federation scope, third-party access, and residual risk.
 
-## Identity as an Architectural Constraint in OT
+## Identity as an architectural constraint in OT
 
 OT identity infrastructure operates under constraints that IT rarely encounters:
 
@@ -19,9 +19,9 @@ These constraints shape which identity patterns can be sustained in practice.
 
 This discussion focuses on human identity. Machine and application identities form a larger and often less controlled surface, but they introduce different technical and lifecycle constraints and are not treated here.
 
-## Common OT Identity Patterns
+## Common OT identity patterns
 
-### Option A: Fully Isolated Local Identities
+### Option A: Fully isolated local identities
 
 In this model, control systems authenticate users locally. Accounts are defined and managed per system or per site, often using local directories or embedded authentication mechanisms.
 
@@ -49,10 +49,9 @@ Without sustained investment in local identity management, this model predictabl
 
 This model prioritizes availability and diagnosability but struggles to meet modern governance expectations.
 
-### Option B: Centralized Identity via Forest Trust or Shared Domain
+### Option B: Centralized identity via forest trust or shared domain
 
-Here, OT systems rely on a central directory, typically through domain trust or shared forest membership.
-This is the most common pattern in brownfield environments, often inherited from earlier infrastructure decisions rather than deliberately selected.
+Here, OT systems rely on a central directory, typically through domain trust or shared forest membership. This is the most common pattern in brownfield environments, often inherited from earlier infrastructure decisions rather than deliberately selected.
 
 **Strengths:**
 
@@ -76,7 +75,7 @@ This is the most common pattern in brownfield environments, often inherited from
 
 If IT is compromised, pre-existing pathways into OT may be available by design.
 
-### Option C: Federated Identity with Privileged Access Management
+### Option C: Federated identity with privileged access management (PAM)
 
 This model separates routine identity from high-consequence authority.
 
@@ -110,7 +109,7 @@ PAM platforms are complex infrastructure with their own availability, upgrade, a
 
 In brownfield environments, legacy applications often cannot consume federation tokens or be modified within vendor validation boundaries. The practical adoption ceiling is frequently defined by application capability rather than architectural intent.
 
-## What Federation Solves
+## What federation actually solves
 
 Federation addresses real operational and security problems.
 
@@ -118,7 +117,7 @@ It reduces password reuse, weak credentials, and shared identities. It enables r
 
 These are significant operational improvements.
 
-## Scoping Federation: Where the Boundary Goes
+## Scoping federation: where the boundary goes
 
 Federation can assert identity while leaving process authority to additional controls.
 
@@ -132,11 +131,11 @@ It can reasonably support:
 
 Actions that change plant state require additional layers reflecting accountability, context, and risk. Where consequence is asymmetric, authority remains local.
 
-## Third-Party and Vendor Access: Where Authority Must Remain Local
+## Third-party and vendor access: where authority must remain local
 
 External parties perform a large portion of privileged activity in OT: commissioning, maintenance, troubleshooting, upgrades. Connectivity is often delivered by IT, but responsibility for outcome remains with the site.
 
-Federation can identify who is connecting. It cannot determine whether the proposed action is safe in current plant context.
+Federation can identify who is connecting. It cannot determine whether the proposed action is safe in the current plant context.
 
 This is where PAM becomes the authority boundary.
 
@@ -148,31 +147,31 @@ This is where PAM becomes the authority boundary.
 * Ability to terminate unsafe activity
 * Emergency mechanisms with accountability
 
-These capabilities require someone present and attentive. Active supervision is common during commissioning and exceptional during routine maintenance. The resulting gap reflects a familiar condition in which responsibility and control reside in different places, and no actor can see or manage the whole.
+These capabilities require someone present and attentive. Active supervision is common during commissioning and exceptional during routine maintenance. The resulting gap reflects a familiar condition: responsibility and control reside in different places, and no actor governs the whole.
 
 Without local authority, responsibility and control diverge, and unmanaged risk accumulates between them.
 
-## Residual Risk and Risk Redistribution
+## Residual risk and risk redistribution
 
 Each identity pattern redistributes risk rather than eliminating it.
 
 | Risk dimension        | Option A (Local) | Option B (Forest Trust) | Option C (Federation + PAM)         |
 | --------------------- | ---------------- | ----------------------- | ----------------------------------- |
-| Primary concentration | Site discipline  | IT directory integrity  | IdP integrity and scope enforcement |
-| Blast radius          | Local            | Cross-boundary systemic | Contained if scoped                 |
-| Governance burden     | Entirely site    | Split                   | Split differently                   |
-| Typical failure       | Credential decay | Lateral movement        | Token minting or scope violation    |
-| Long-term drift       | Predictable      | Silent and wide         | Dependent on enforcement            |
+| Primary concentration    | Site discipline  | IT directory integrity  | IdP integrity and scope control     |
+| Blast radius             | Local            | Cross-boundary systemic | Scoped if enforcement holds         |
+| Governance burden        | Entirely site    | Shared, unevenly        | Shared, differently distributed     |
+| Architectural weak point | Credential decay | Lateral movement        | Token minting or scope violation    |
+| Long-term drift          | Visible, local   | Silent, wide            | Dependent on enforcement durability |
 
-### Identity Provider Compromise
+### Identity provider compromise
 
 A compromised IdP can mint tokens at scale. If federation is limited to visibility, exposure differs from infrastructure trust compromise.
 
-### Downstream Enforcement Fragility
+### Downstream enforcement fragility
 
 If one system mishandles claims, containment collapses.
 
-## What Shifts, and What Does Not
+## What shifts and what does not
 
 **Option A:** All burden remains local. Maximum autonomy. Maximum governance fragility.
 
@@ -182,21 +181,38 @@ If one system mishandles claims, containment collapses.
 
 Over long operational lifecycles, models drift as exceptions, staffing changes, and local workarounds accumulate. Central mechanisms weaken, exceptions accumulate, and environments migrate toward informal control.
 
-## This Is Not a Solvable Problem
+## Residual tensions that cannot be eliminated
 
 No identity architecture eliminates the tension between centralized governance and operational resilience. Each model trades visibility for autonomy, efficiency for blast radius, or manageability for dependency.
 
 The goal is not to find the correct model. It is to choose where residual risk resides, ensure it is visible, and verify that failure modes are survivable by the teams who will live with them.
 
-## Implications for Identity Design in OT
+## Implications for identity design in OT
 
-* Plan for degradation over operational lifecycles
-* Do not require federation for operator control or engineering changes to process state
-* Keep authority for high-consequence actions under OT governance
-* Understand infrastructure-level implications of directory trust
-* Treat time synchronization and IdP availability as operational dependencies, not assumptions
-* Design explicit fallback paths for identity system failure
-* Expect governance erosion and design containment accordingly
-* Prefer architectures that fail visibly rather than silently
+The identity model chosen for an OT environment is less about feature completeness and more about survivability under stress. The following implications separate structural minimums from lifecycle realities.
 
-Identity in OT is not about elegance. It is about sustaining operational authority under stress for decades, and knowing where that authority will fail first.
+### Architectural rules (structural minimums)
+
+These are design constraints required to preserve process safety and local authority under failure conditions:
+
+* **Keep authority for high-consequence actions under OT governance.** External systems must not dictate local process safety.
+
+* **Do not require federation for operator control or engineering changes to process state.** Core operations must remain possible during IdP or network outages.
+
+* **Design explicit fallback paths for identity system failure.** Do not rely on improvised break-glass procedures when the primary authentication path fails.
+
+* **Prefer architectures that fail visibly rather than silently.** Operators should know immediately when trust mechanisms or dependencies degrade.
+
+### Operational realities (lifecycle assumptions)
+
+These reflect structural friction in long-lifecycle industrial environments:
+
+* **Plan for degradation over operational lifecycles.** Systems will operate long after vendor support and initial project structures expire.
+
+* **Expect governance erosion and design containment accordingly.** Local workarounds will accumulate; scoped authority and network segmentation become the final containment layers.
+
+* **Treat time synchronization and IdP availability as operational dependencies, not assumptions.** Token validation and PKI mechanisms fail immediately when these underlying services degrade.
+
+* **Understand infrastructure-level implications of directory trust.** Domain membership is not only an identity decision, but an expansion of systemic blast radius.
+
+Identity in OT is not about elegance. It is about sustaining operational authority under stress for decades and knowing where that authority will fail first.

@@ -12,9 +12,9 @@ Many installations were commissioned under assumptions of isolation. Isolation i
 
 Understanding apparent inertia requires understanding the constraints that produced it and that continue to shape which forms of change are viable.
 
-**Scope:** This document focuses on continuous process industries and other high-consequence environments where disturbances can cascade into physical outcomes. Discrete manufacturing and lower-consequence operations may face different trade-offs.
+**Scope:** This paper focuses on continuous process industries and other high-consequence environments where disturbances can cascade into physical outcomes. Discrete manufacturing and lower-consequence operations may face different trade-offs.
 
-## 1. Different Optimization Problems
+## 1. Different optimization problems
 
 IT and OT evolved under different definitions of success.
 
@@ -26,7 +26,7 @@ Control systems widely deployed in the 1990s and early 2000s were engineered as 
 
 Isolation therefore became a working assumption. Contracts, support models, and responsibilities formed around it. Many still persist.
 
-## 2. Validated Functions, Not Configurable Platforms
+## 2. Validated functions, not configurable platforms
 
 In IT, organizations buy platforms intended to be modified.
 
@@ -45,7 +45,7 @@ Patch and upgrade timing is therefore constrained by vendor validation cycles ra
 
 This model allowed asset owners to transfer integration and validation risk to the original system supplier. Under isolation assumptions, it worked well. In a connected environment, it becomes a structural constraint on security evolution.
 
-### 2.1 Transparency and Information Asymmetry
+### 2.1 Transparency and information asymmetry
 
 The validation model also creates a visibility constraint.
 
@@ -55,7 +55,7 @@ Even when a vulnerability is publicly disclosed, asset owners may be unable to d
 
 The constraint is therefore not only contractual. It is informational.
 
-### 2.2 Authority Versus Accountability
+### 2.2 Authority versus accountability
 
 A structural tension follows.
 
@@ -71,7 +71,7 @@ Over time, this dynamic increases dependence on the incumbent vendor not only fo
 
 Inaction is not always neglect. In many cases, it is constraint.
 
-## 3. Control Systems as Operational Equipment
+## 3. Control systems as operational equipment
 
 These dynamics shaped how control systems entered operational culture.
 
@@ -81,9 +81,9 @@ Once commissioned within a validated envelope, stability became the default expe
 
 Modern cybersecurity depends on visibility into layers that historically drew attention only when they broke.
 
-## 4. Stability as a Safety and Economic Strategy
+## 4. Stability as a safety and economic strategy
 
-### 4.1 Asymmetric Failure Costs
+### 4.1 Asymmetric failure costs
 
 Continuous processes bind control behavior directly to hazardous and thermodynamically complex operations.
 
@@ -93,7 +93,7 @@ Disturbing a working system offers limited benefit and clear exposure.
 
 The bias toward leaving stable systems untouched is reinforced by lived consequence.
 
-### 4.2 Determinism and Timing
+### 4.2 Determinism and timing
 
 Many OT functions depend on predictable execution.
 
@@ -101,7 +101,7 @@ Small timing deviations tolerated in enterprise IT can trigger watchdogs, commun
 
 Activities that introduce uncertain interaction are judged accordingly.
 
-### 4.3 Transient Risk During Change
+### 4.3 Transient risk during change
 
 Change increases uncertainty.
 
@@ -111,7 +111,7 @@ When implementation risk is immediate, concrete, and borne by the team making th
 
 The conditions required for safe execution may be rare and tied to shutdowns, specialist availability, or extensive preparation. In many organizations, the backlog grows faster than the capacity to retire it.
 
-### 4.4 Lifecycle Duration
+### 4.4 Lifecycle duration
 
 Enterprise infrastructure expects renewal within years.
 Industrial infrastructure is expected to serve for decades.
@@ -120,9 +120,9 @@ End of support and end of use diverge. Replacement depends on capital cycles, ou
 
 Long persistence follows from these mechanics.
 
-## 5. Capital Projects and Operational Ownership
+## 5. Capital projects and operational ownership
 
-### 5.1 Project Delivery
+### 5.1 Project delivery
 
 Major OT systems are usually delivered through capital projects. After commissioning, responsibility transfers to operations teams focused on continuity and repair.
 
@@ -130,7 +130,7 @@ These teams are rarely funded or staffed to function like product engineering or
 
 Performance indicators emphasize availability, yield, and process stability. A system that runs safely and within specification is considered successful regardless of patch state. Security improvement work arrives as an external requirement. When production targets are met, no internal signal indicates anything is wrong.
 
-### 5.2 Competence and Recovery
+### 5.2 Competence and recovery
 
 Local familiarity with known behavior strongly influences restoration speed. Introducing new technology without equal investment in competence can extend outages.
 
@@ -144,7 +144,7 @@ A technically superior system that extends outage duration under stress is, oper
 
 From this perspective, familiarity contributes directly to resilience.
 
-## 6. Security by Containment
+## 6. Security by containment
 
 Because intervention inside validated assets is difficult, protection has typically been applied around them.
 
@@ -160,16 +160,14 @@ How integration pressure alters feasible security models is a topic in its own r
 
 Additional mechanisms are required, but they must fit what operations can sustain and what the business requires to remain competitive.
 
-## 7. From Patterns to Outcomes
+## 7. From patterns to outcomes
 
 The constraints described above have not only shaped operations. They have also influenced, and at times distorted, the security models later applied to these environments.
 
-### 7.1 When Descriptions Become Prescriptions
+### 7.1 When descriptions become prescriptions
 
-The Purdue Enterprise Reference Architecture documented how industrial 
-systems were structured: field devices, control layers, site operations, 
-enterprise. It described existing reality. It did not prescribe security 
-boundaries.
+The Purdue Enterprise Reference Architecture documented how industrial systems were structured: field devices, control layers, site operations, 
+enterprise. It described existing reality. It did not prescribe security boundaries.
 
 When OT security emerged as a discipline, Purdue was adopted as a 
 segmentation template. Over time, description hardened into prescription. 
@@ -193,7 +191,7 @@ The solution is not to discard Purdue. It is to recognize when
 description has become prescription and reconnect security measures 
 to actual threat paths rather than template conformity.
 
-### 7.2 Pattern Compliance vs Risk Reduction
+### 7.2 Pattern compliance vs risk reduction
 
 Practices effective in one context do not automatically transfer to another. When attention centers on reproducing a template rather than addressing exposure, controls are selected for conformity rather than relevance.
 
@@ -201,7 +199,7 @@ Fixed zoning models, rigid traffic rules, and uniform baselines applied across d
 
 Security work must reconnect measures to credible threat paths, system behavior, and consequence. Patterns inform design. They do not replace engineering judgment.
 
-## 8. Consequence-Driven Decisions
+## 8. Consequence-driven decisions
 
 In OT, severity and recoverability dominate decision-making.
 
@@ -211,7 +209,7 @@ Measures that improve resistance while keeping systems understandable are more l
 
 The objective is sustainable reduction of exposure.
 
-## 9. Why the Situation Persists
+## 9. Why the situation persists
 
 Long lifecycles, vendor validation regimes, funding structures, competence distribution, and asymmetric failure costs reinforce one another.
 
@@ -221,7 +219,7 @@ Slow change is not dysfunction. It is the rational equilibrium produced by these
 
 Misreading this equilibrium leads to security strategies that are elegant on paper and unimplementable in practice.
 
-## 10. Implications for Security Design
+## 10. Implications for security design
 
 The constraints described above are not arguments against improvement. They define the boundaries within which security architecture must function.
 
@@ -249,7 +247,7 @@ Enduring change follows maintenance and investment rhythms.
 
 Assume operators may lack the authority to modify validated systems independently. Design controls that function within vendor validation constraints rather than depending on their removal.
 
-## Moving Forward
+## Moving forward
 
 Security evolution is necessary.
 
@@ -257,4 +255,4 @@ Progress depends on approaches that fit environments that are long-lived, conseq
 
 The goal is not to reproduce enterprise patterns. The goal is to achieve comparable or better risk outcomes using methods that can survive the life of the facility.
 
-Security in long-lifecycle environments is not a deployment problem. It is a durability problem.
+Security in long-lifecycle environments is not primarily a deployment problem. It is a durability problem.
