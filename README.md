@@ -26,7 +26,8 @@ Incomplete ideas benefit from contact with operational experience more than fini
 
 ## About
 
-Mattias Pilroth. OT security architecture in European chemical and process industry environments.
+Mattias Pilroth, working with enterprise OT security architecture across European chemical and process industry environments.
+
+Independent work. Does not represent the positions of any employer or client. All examples are abstracted from general operational patterns. No proprietary, confidential, or organizationally identifying information is included.
 
 [LinkedIn](https://www.linkedin.com/in/mattiaspilroth)  
-[operational-resilience-security](https://github.com/mattiaspilroth/operational-resilience-security)
