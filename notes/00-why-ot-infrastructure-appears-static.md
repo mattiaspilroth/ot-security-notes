@@ -6,7 +6,7 @@
 
 This note is written for IT and enterprise security professionals who need to understand why OT environments resist changes that appear straightforward from an enterprise perspective.
 
-It does not compare vendors or prescribe specific controls. Its purpose is narrower. It explains the structural constraints, lifecycle realities, and optimization targets that shape rational engineering decisions in industrial environments.
+It does not compare vendors or prescribe specific controls. Its purpose is narrower. It explains the historical constraints, lifecycle realities, and optimization targets under which many industrial decisions were made, and why the structures those decisions produced have outlasted the assumptions behind them.
 
 The focus is organizational design, lifecycle economics, and risk trade-offs. Understanding those constraints is a prerequisite for meaningful security improvement.
 
@@ -87,7 +87,7 @@ Maintenance organizations are typically measured on availability, stability, and
 
 If a system produces safely and reliably, it is considered healthy. In that environment, change requires a clear operational justification.
 
-## Stability as a safety strategy
+## Why stability became the default
 
 ### Change as a risk multiplier
 
@@ -119,6 +119,12 @@ End-of-support does not align with end-of-use. Replacement requires operational 
 
 Stability is therefore the outcome of lifecycle economics, not technological stagnation.
 
+---
+
+This logic was formed under an assumption of functional isolation. That assumption was once defensible. It is no longer reliable.
+
+The threat environment has changed materially. The organizational structures, funding models, and validation regimes shaped by earlier assumptions largely have not.
+
 ## The maintenance mindset
 
 Industrial control systems are often conceptualized as components of a machine rather than evolving platforms.
@@ -139,7 +145,7 @@ Because modifying validated endpoints carries risk, security in OT is often impl
 
 Network segmentation, DMZ architectures, controlled remote access, and strict change management are common approaches. The objective is to reduce blast radius, preserve validated states, and limit exposure without altering internal behavior.
 
-This approach is sometimes interpreted as immaturity because it lacks the host-level instrumentation common in enterprise IT. In reality, it reflects a deliberate design choice: protect the boundary rather than perturb the validated core.
+This approach is sometimes interpreted as immaturity because it lacks the host-level instrumentation common in enterprise IT. This reflects a trade-off: control what crosses the boundary rather than change what sits behind it.
 
 Limited host hardening or intrusive monitoring is often a trade-off in favor of predictability and stability. Security intent is expressed through containment rather than transformation.
 
@@ -161,8 +167,11 @@ The apparent static nature of OT infrastructure is not the result of neglect or 
 
 OT infrastructure appears static because it is optimized for safety, predictability, repairability under pressure, and clear liability boundaries.
 
-These characteristics are not signs of immaturity. They are rational responses to different boundary conditions.
+These characteristics are not signs of immaturity. They are rational responses to boundary conditions that existed when the systems were built.
 
-Stability, in this context, is not stagnation. It is an engineered outcome shaped by safety, lifecycle economics, operational accountability, and consequence management.
+Rational origin does not guarantee continued adequacy.
+Structures that were optimized for isolation and stability can become risk multipliers when connectivity, remote access, and integration expand without equivalent structural adaptation.
 
-Effective OT security does not begin with transplanting enterprise practices. It begins with understanding the constraints under which industrial decisions are made.
+The boundary conditions have shifted. Physical isolation is no longer a viable security assumption. The organizational structures, funding models, and risk frameworks that isolation supported have not yet fully adapted, not because the people operating within them are unaware, but because those structures are slow to change and the consequences of changing them incorrectly are real.
+
+Understanding why OT infrastructure appears static is not an argument for preserving it unchanged. It is a prerequisite for changing it without introducing the failures that the original design was built to prevent.
